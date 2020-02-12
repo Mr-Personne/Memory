@@ -28,12 +28,13 @@ class NumbersController extends AbstractController
      */
     public function setup(Request $request)
     {
-        
+        print_r($_POST);
         // $time = new Time();
         // $time->setMinutes(5);
         // $time->setSecondes(0);
 
         $form = $this->createForm(SetupNumberType::class);
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             // $form->getData() holds the submitted values
             // but, the original `$task` variable has also been updated
@@ -44,7 +45,8 @@ class NumbersController extends AbstractController
             // $entityManager = $this->getDoctrine()->getManager();
             // $entityManager->persist($task);
             // $entityManager->flush();
-    
+            session_start();
+            $_SESSION["lol"] = $_POST;
             return $this->redirectToRoute('numbers_memorise');
         }
 
@@ -59,6 +61,8 @@ class NumbersController extends AbstractController
      */
     public function memorise()
     {
+
+        print_r($_SESSION["lol"]);
         return $this->render('numbers/memorise.html.twig', [
             'controller_name' => 'Numbers memorise',
         ]);
