@@ -7,6 +7,7 @@ use App\Form\SetupNumberType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * @Route("/numbers")
@@ -26,7 +27,7 @@ class NumbersController extends AbstractController
     /**
      * @Route("/setup", name="numbers_setup")
      */
-    public function setup(Request $request)
+    public function setup(Request $request, SessionInterface $session)
     {
         print_r($_POST);
         // $time = new Time();
@@ -45,26 +46,27 @@ class NumbersController extends AbstractController
             // $entityManager = $this->getDoctrine()->getManager();
             // $entityManager->persist($task);
             // $entityManager->flush();
-            session_start();
-            $_SESSION["lol"] = $_POST;
+            $session->set('attribute-name', $_POST);
             return $this->redirectToRoute('numbers_memorise');
         }
-
+        
         return $this->render('numbers/setup.html.twig', [
             'controller_name' => 'Numbers Setup',
             'form' => $form->createView(),
+            
         ]);
     }
 
     /**
      * @Route("/memorise", name="numbers_memorise")
      */
-    public function memorise()
+    public function memorise(SessionInterface $session)
     {
 
-        print_r($_SESSION["lol"]);
+        // print_r($_SESSION["lol"]);
         return $this->render('numbers/memorise.html.twig', [
             'controller_name' => 'Numbers memorise',
+            'session' => $session->get('attribute-name')
         ]);
     }
 
