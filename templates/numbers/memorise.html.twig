@@ -12,9 +12,13 @@
     <h1><a href="{{ path('default') }}">Memory</a></h1>
     <h2>Hello {{ controller_name }}! ✅</h2>
     
-    {% for item in session %}
+    {# {% for item in session %}
         <p>{{ item }}</p>
-    {% endfor %}
+    {% endfor %} #}
+
+    <p>numQuantity : {{ numQuantity }}</p>
+    <p>numMinutes : {{ numMinutes }}</p>
+    <p>numSecondes : {{ numSecondes }}</p>
 
     This friendly message is coming from:
     <ul>
@@ -23,10 +27,17 @@
     </ul>
 
     <p>Time :</p>
-    <p>?? : ?? : ??</p>
+    <p>{{ numMinutes }} : {{ numSecondes }}</p>
     <p>Memorise this :</p>
-    <p>85 74 25 11 44 ...</p>
+    <p class="generated-nums">85 74 25 11 44 ...</p>
     <button><a href="{{ path('numbers_recall') }}">Ready!</a></button>
 
 </div>
+
+<script>
+    
+
+    const generatedNumsElement = document.querySelector(".generated-nums");
+    generatedNumsElement.innerText = "{{generatedNums}}";
+</script>
 {% endblock %}

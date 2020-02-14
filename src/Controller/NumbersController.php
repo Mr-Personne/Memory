@@ -29,7 +29,7 @@ class NumbersController extends AbstractController
      */
     public function setup(Request $request, SessionInterface $session)
     {
-        print_r($_POST);
+        // print_r($_POST['setup_number']);
         // $time = new Time();
         // $time->setMinutes(5);
         // $time->setSecondes(0);
@@ -40,20 +40,22 @@ class NumbersController extends AbstractController
             // $form->getData() holds the submitted values
             // but, the original `$task` variable has also been updated
             // $task = $form->getData();
-    
+
             // ... perform some action, such as saving the task to the database
             // for example, if Task is a Doctrine entity, save it!
             // $entityManager = $this->getDoctrine()->getManager();
             // $entityManager->persist($task);
             // $entityManager->flush();
-            $session->set('attribute-name', $_POST);
+            $session->set('numQuantity', $_POST['setup_number']['quantity']);
+            $session->set('numMinutes', $_POST['setup_number']['minutes']);
+            $session->set('numSecondes', $_POST['setup_number']['secondes']);
             return $this->redirectToRoute('numbers_memorise');
         }
-        
+
         return $this->render('numbers/setup.html.twig', [
             'controller_name' => 'Numbers Setup',
             'form' => $form->createView(),
-            
+
         ]);
     }
 
@@ -63,10 +65,30 @@ class NumbersController extends AbstractController
     public function memorise(SessionInterface $session)
     {
 
-        // print_r($_SESSION["lol"]);
+        // print_r($session->get('attribute-name'));
+        $randNumLen = $session->get('numQuantity');
+        $setNumbers = 1;
+        $generatedNums = "";
+        for ($i = 0; $i < $randNumLen; $i++) {
+            $randNum = rand(0, 9);
+            $generatedNums .= $randNum;
+            // console.log(randNum);
+
+            //checks if two numbers has been set, if so, creates an extra space (so we get 18 33 73 10 4...etc)
+            if ($setNumbers == 2) {
+                $generatedNums .= " ";
+                $setNumbers = 1;
+            } else {
+                $setNumbers++;
+            }
+        }
+        $session->set('generatedNums', $generatedNums);
         return $this->render('numbers/memorise.html.twig', [
             'controller_name' => 'Numbers memorise',
-            'session' => $session->get('attribute-name')
+            'numQuantity' => $session->get('numQuantity'),
+            'numMinutes' => $session->get('numMinutes'),
+            'numSecondes' => $session->get('numSecondes'),
+            'generatedNums' => $generatedNums,
         ]);
     }
 
