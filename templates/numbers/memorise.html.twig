@@ -37,6 +37,7 @@
 
 </div>
 
+
 <script>
     const generatedNumsElement = document.querySelector(".generated-nums");
     generatedNumsElement.innerText = "{{generatedNums}}";
@@ -88,9 +89,46 @@
         if (minutes === 0 && secondes === 0) {
             // alert("Time over!");
             clearTimeout(timeout);
-            /*onOff=0;*/
+            ajaxCallAsynch("numbers");
         }
     }
+
+
+    //ajax
+    function ajaxCallAsynch(section) {
+        // console.dir(myForm);
+        console.log('section : ', section);
+    
+        console.log(section);
+        var formData = new FormData();
+        if (section === undefined) {
+        console.log("end ajax default ", section);
+        return;
+        }
+        else {
+        console.log("coucou ajax");
+        }
+    
+    
+        
+        fetch(`/${section}/memorise/end`).then(function (response) {
+    
+        console.dir(response);
+        return response.text();
+    
+        }).then(function (data) {
+        console.log("data : ", data);
+        if (data != "") {
+            location.href = '/numbers/recall';
+        }
+    
+        
+        });
+    
+    
+    }
+  
+    //END AJAX
     
 
   timer();
