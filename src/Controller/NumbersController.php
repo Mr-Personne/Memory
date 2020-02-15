@@ -92,6 +92,16 @@ class NumbersController extends AbstractController
         ]);
     }
 
+
+    /**
+     * @Route("/memorise/end", name="numbers_memorise_end")
+     */
+    public function endMemorise(SessionInterface $session)
+    {
+        return $this->redirectToRoute('numbers_recall');
+    }
+
+
     /**
      * @Route("/recall", name="numbers_recall")
      */
