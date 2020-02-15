@@ -18,11 +18,7 @@
         <li>Your template at <code><a href="{{ '/var/www/html/templates/numbers/index.html.twig'|file_link(0) }}">templates/numbers/index.html.twig</a></code></li>
     </ul>
 
-    <p>How many do you want to memorise?</p>
-    <input type="text">
-    <p>How long do you need to memorise?</p>
-    <input type="text">
-    <button><a href="{{ path('numbers_memorise') }}">Go!</a></button>
+    <p>By default you will have 5 minutes to remember 10 numbers</p>
 
     {{ form(form) }}
 

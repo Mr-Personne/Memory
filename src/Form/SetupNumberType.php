@@ -13,9 +13,31 @@ class SetupNumberType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('quantity', IntegerType::class)
-            ->add('minutes', IntegerType::class)
-            ->add('secondes', IntegerType::class)
+            ->add('quantity', IntegerType::class, [
+                'label'  => 'How many do you want to memorise?',
+                 'attr' => [
+                     'class' => 'quantity',
+                     'min' => 1,
+                     'value' => 10,
+                    ], 
+            ])
+            ->add('minutes', IntegerType::class, [
+                'label'  => 'How long do you need to memorise?',
+                'attr' => [
+                    'class' => 'minutes',
+                    'min' => 0,
+                    'value' => 5
+                   ], 
+            ])
+            ->add('secondes', IntegerType::class, [
+                'label'  => false,
+                'attr' => [
+                    'class' => 'secondes',
+                    'min' => 0,
+                    'max' => 59,
+                    'value' => 0
+                   ], 
+            ])
             ->add('go', SubmitType::class);
     }
 
