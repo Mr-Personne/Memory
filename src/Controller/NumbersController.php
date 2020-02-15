@@ -4,10 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Time;
 use App\Form\SetupNumberType;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Form\RecallNumberType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/numbers")
@@ -105,10 +106,21 @@ class NumbersController extends AbstractController
     /**
      * @Route("/recall", name="numbers_recall")
      */
-    public function recall()
+    public function recall(Request $request, SessionInterface $session)
     {
+
+        $form = $this->createForm(RecallNumberType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $session->set('userAnswer', $_POST);
+            return $this->redirectToRoute('numbers_score');
+        }
+
+        
         return $this->render('numbers/recall.html.twig', [
             'controller_name' => 'Numbers recall',
+            'form' => $form->createView(),
         ]);
     }
 
@@ -117,6 +129,7 @@ class NumbersController extends AbstractController
      */
     public function score()
     {
+        print_r($_POST);
         return $this->render('numbers/score.html.twig', [
             'controller_name' => 'Numbers score',
         ]);
