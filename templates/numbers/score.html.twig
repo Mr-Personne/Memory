@@ -18,12 +18,14 @@
         <li>Your template at <code><a href="{{ '/var/www/html/templates/numbers/index.html.twig'|file_link(0) }}">templates/numbers/index.html.twig</a></code></li>
     </ul>
 
+    
+
     <p>Score :</p>
-    <p>5/10</p>
+    <p>{{score}}/{{maxScore}}</p>
     <p>The Answer :</p>
-    <p>85 74 25 11 44 ...</p>
+    <p>{{strAnswer}}</p>
     <p>Your Answer :</p>
-    <p>84 74 30 11 55 ...</p>
+    <p>{{strUserAnswer}}</p>
     <button><a href="{{ path('default') }}">Redo</a></button>
     <button><a href="{{ path('default') }}">Astuces</a></button>
     <button><a href="{{ path('default') }}">Home</a></button>
