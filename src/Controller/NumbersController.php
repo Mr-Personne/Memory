@@ -112,12 +112,12 @@ class NumbersController extends AbstractController
         $form = $this->createForm(RecallNumberType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
             $session->set('userAnswer', $_POST['recall_number']);
             return $this->redirectToRoute('numbers_score');
         }
 
-        
+
         return $this->render('numbers/recall.html.twig', [
             'controller_name' => 'Numbers recall',
             'form' => $form->createView(),
@@ -140,19 +140,55 @@ class NumbersController extends AbstractController
         $answer = str_replace(" ", "", $answer);
         $userAnswer = str_replace(" ", "", $userAnswer);
         // echo "-----------";
-        print_r($userAnswer);
-        echo ' vs ';
-        print_r($answer);
+        // print_r($userAnswer);
+        // echo ' vs ';
+        // print_r($answer);
 
-        //calculates score
+        //calculates score v1
+        // $score = 0;
+        // $maxScore = strlen($answer);
+        // for ($i=0; $i < strlen($userAnswer); $i++) { 
+        //     if ($userAnswer[$i] == $answer[$i]) {
+        //         $score++;
+        //     }
+        // }
+
+
+        //calculates score v - array_search
         $score = 0;
         $maxScore = strlen($answer);
-        for ($i=0; $i < strlen($userAnswer); $i++) { 
-            if ($userAnswer[$i] == $answer[$i]) {
-                $score++;
+        $userAnswArr = str_split($userAnswer);
+        $answArr = str_split($answer);
+        $len = count($userAnswArr);
+        // print_r($userAnswArr);
+        // echo "    " . $len . "  ";
+        // print_r($answArr);
+        for ($i = 0; $i < $len; $i++) {
+            // echo ' '.$userAnswArr[$i];
+            // echo '    '.array_search('lol', $answArr).' next : <br>';
+            // if (array_search('lol', $answArr) == "") {
+            //     echo "loool";
+            // }
+            if (array_search($userAnswArr[$i], $answArr) !== "") {
+                // $score++;
+                //returns position of found number in the answer
+                $numIndex = array_search($userAnswArr[$i], $answArr);
+                // echo ' NUMBE INDEX ' . $numIndex. ' £USERARRAY '.$userAnswArr[$i];
+                //deletes it from the answer array so that it doesnt take in account next time
+                // array_splice($answArr, $numberIndex, 1);
+                unset($answArr[$numIndex]);
+
+
+                // echo "<br><br>";
+                // echo implode("", $userAnswArr);
+                // print_r($userAnswArr);
+                // echo "USER    " . $len . "  ANSWER";
+                // echo implode("", $answArr);
+                // print_r($answArr);
+                // echo "<br>";
             }
         }
-
+        $score = $maxScore - count($answArr);
         //resplits the answers back to two digits with a space between each for user presentation
         $strAnswer = chunk_split($answer, 2, ' ');
         $strUserAnswer = chunk_split($userAnswer, 2, ' ');
