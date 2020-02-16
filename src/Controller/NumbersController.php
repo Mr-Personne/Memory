@@ -113,7 +113,7 @@ class NumbersController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             
-            $session->set('userAnswer', $_POST);
+            $session->set('userAnswer', $_POST['recall_number']);
             return $this->redirectToRoute('numbers_score');
         }
 
@@ -127,11 +127,45 @@ class NumbersController extends AbstractController
     /**
      * @Route("/score", name="numbers_score")
      */
-    public function score()
+    public function score(SessionInterface $session)
     {
-        print_r($_POST);
+        $userAnswerSession = $session->get('userAnswer');
+        $userAnswer = $userAnswerSession['userAnswer'];
+
+        $answer = $session->get('generatedNums');
+        // print_r($userAnswer);
+        // echo ' vs ';
+        // print_r($answer);
+
+        $answer = str_replace(" ", "", $answer);
+        $userAnswer = str_replace(" ", "", $userAnswer);
+        // echo "-----------";
+        print_r($userAnswer);
+        echo ' vs ';
+        print_r($answer);
+
+        //calculates score
+        $score = 0;
+        $maxScore = strlen($answer);
+        for ($i=0; $i < strlen($userAnswer); $i++) { 
+            if ($userAnswer[$i] == $answer[$i]) {
+                $score++;
+            }
+        }
+
+        //resplits the answers back to two digits with a space between each for user presentation
+        $strAnswer = chunk_split($answer, 2, ' ');
+        $strUserAnswer = chunk_split($userAnswer, 2, ' ');
+
+
         return $this->render('numbers/score.html.twig', [
             'controller_name' => 'Numbers score',
+            'userAnswer' => $userAnswer,
+            'answer' => $answer,
+            'score' => $score,
+            'maxScore' => $maxScore,
+            'strUserAnswer' => $strUserAnswer,
+            'strAnswer' => $strAnswer,
         ]);
     }
 }
