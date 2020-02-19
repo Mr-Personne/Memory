@@ -1,0 +1,140 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello NumbersController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1><a href="{{ path('default') }}">Memory</a></h1>
+    <h2>Hello {{ controller_name }}! ✅</h2>
+    
+    {# {% for item in session %}
+        <p>{{ item }}</p>
+    {% endfor %} #}
+
+    {# <p>numQuantity : {{ numQuantity }}</p>
+    <p>numMinutes : {{ numMinutes }}</p>
+    <p>numSecondes : {{ numSecondes }}</p> #}
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code><a href="{{ '/var/www/html/src/Controller/NumbersController.php'|file_link(0) }}">src/Controller/NumbersController.php</a></code></li>
+        <li>Your template at <code><a href="{{ '/var/www/html/templates/numbers/index.html.twig'|file_link(0) }}">templates/numbers/index.html.twig</a></code></li>
+    </ul>
+
+    <p>Time :</p>
+    <p><span class="minutes-display">{{ wordMinutes }}</span> : <span class="secondes-display">{{ wordSecondes }}</span></p>
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+    </div>
+    <p>Memorise this :</p>
+    {# <p class="generated-nums">{{wordsDisplay}}</p> #}
+    <div>
+        {% for word in wordsList %}
+			<span> {{word.content}} </span>
+		{% endfor %}
+    </div>
+    <button><a href="{{ path('words_setup') }}">Ready!</a></button>
+
+</div>
+
+
+<script>
+    
+
+    var minutes = {{ wordMinutes }};
+    var secondes = {{ wordSecondes }};
+    const fullTimeInSecondes = (minutes*60) + secondes;
+    var timeout;
+
+    function timer() {
+
+        if (secondes === 0) {
+            minutes = minutes - 1;
+            secondes = 60;
+        }
+        secondes = secondes - 1;
+
+        //stringy minutes for extra zero in front
+        if (minutes < 10) {
+            var stringyMins = "0" + minutes;
+        }
+        else {
+            var stringyMins = minutes;
+        }
+
+        //stringy secondes for extra zero in front
+        if (secondes < 10) {
+            var stringySecs = "0" + secondes;
+        }
+        else {
+            var stringySecs = secondes;
+        }
+
+
+        var minDisplay = document.querySelector(".minutes-display");
+        minDisplay.innerText = stringyMins;
+
+        var secDisplay = document.querySelector(".secondes-display");
+        secDisplay.innerText = stringySecs;
+
+        var currentFullTimeInSecondes = (minutes * 60) + secondes;
+        var progressPercent = (currentFullTimeInSecondes * 100) / fullTimeInSecondes;
+        // console.log(progressPercent);
+        var progressBar = document.querySelector(".progress-bar");
+        progressBar.style.width = progressPercent + "%";
+
+
+        timeout = setTimeout(timer, 1000);
+        if (minutes === 0 && secondes === 0) {
+            // alert("Time over!");
+            clearTimeout(timeout);
+            // ajaxCallAsynch("numbers");
+        }
+    }
+
+
+    //ajax
+    function ajaxCallAsynch(section) {
+        // console.dir(myForm);
+        console.log('section : ', section);
+    
+        console.log(section);
+        var formData = new FormData();
+        if (section === undefined) {
+        console.log("end ajax default ", section);
+        return;
+        }
+        else {
+        console.log("coucou ajax");
+        }
+    
+    
+        
+        fetch(`/${section}/memorise/end`).then(function (response) {
+    
+        console.dir(response);
+        return response.text();
+    
+        }).then(function (data) {
+        console.log("data : ", data);
+        if (data != "") {
+            location.href = '/numbers/recall';
+        }
+    
+        
+        });
+    
+    
+    }
+  
+    //END AJAX
+    
+
+  timer();
+</script>
+{% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\SetupWordType;
+use App\Repository\WordRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -28,18 +29,14 @@ class WordsController extends AbstractController
      */
     public function setup(Request $request, SessionInterface $session)
     {
-        // print_r($_POST['setup_number']);
-        // $time = new Time();
-        // $time->setMinutes(5);
-        // $time->setSecondes(0);
 
         $form = $this->createForm(SetupWordType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             
-            $session->set('numQuantity', $_POST['setup_number']['quantity']);
-            $session->set('numMinutes', $_POST['setup_number']['minutes']);
-            $session->set('numSecondes', $_POST['setup_number']['secondes']);
+            $session->set('wordQuantity', $_POST['setup_word']['quantity']);
+            $session->set('wordMinutes', $_POST['setup_word']['minutes']);
+            $session->set('wordSecondes', $_POST['setup_word']['secondes']);
             return $this->redirectToRoute('words_memorise');
         }
 
@@ -47,6 +44,33 @@ class WordsController extends AbstractController
             'controller_name' => 'words Setup',
             'form' => $form->createView(),
 
+        ]);
+    }
+
+    /**
+     * @Route("/memorise", name="words_memorise")
+     */
+    public function memorise(SessionInterface $session, WordRepository $wordRepository)
+    {
+        $wordsList = $wordRepository->findAll();
+        // print_r($wordsList);
+        // $randWordLen = $session->get('wordQuantity');
+        // // $setWords = 1;
+        // $wordsArray = array();
+        // $wordsDisplay = "";
+        // for ($i = 0; $i < $randWordLen; $i++) {
+        //     $randIndex = rand(0, 500);
+        //     array_push($wordsArray, $wordsList[$randIndex]);
+        //     $wordsDisplay .= $wordsList[$randIndex] . " ";
+
+        // }
+        // $session->set('generatedNums', $generatedNums);
+        return $this->render('words/memorise.html.twig', [
+            'controller_name' => 'words memorise',
+            'wordQuantity' => $session->get('wordQuantity'),
+            'wordMinutes' => $session->get('wordMinutes'),
+            'wordSecondes' => $session->get('wordSecondes'),
+            'wordsList' => $wordsList,
         ]);
     }
 }
