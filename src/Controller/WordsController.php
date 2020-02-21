@@ -53,6 +53,7 @@ class WordsController extends AbstractController
     public function memorise(SessionInterface $session, WordRepository $wordRepository)
     {
         $wordsList = $wordRepository->findAll();
+        shuffle($wordsList);
         // print_r($wordsList);
         // $randWordLen = $session->get('wordQuantity');
         // // $setWords = 1;
