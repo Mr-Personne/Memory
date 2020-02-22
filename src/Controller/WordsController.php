@@ -34,7 +34,7 @@ class WordsController extends AbstractController
         $form = $this->createForm(SetupWordType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
             $session->set('wordQuantity', $_POST['setup_word']['quantity']);
             $session->set('wordMinutes', $_POST['setup_word']['minutes']);
             $session->set('wordSecondes', $_POST['setup_word']['secondes']);
@@ -77,13 +77,16 @@ class WordsController extends AbstractController
     }
 
 
-    
+
     /**
      * @Route("/memorise/end", name="words_memorise_end")
      */
     public function endMemorise(SessionInterface $session)
     {
-        return $this->redirectToRoute('words_setup');
+        $session->set('generatedWords', $_POST['data']);
+        // print_r($_POST);
+        return $this->redirectToRoute('words_memorise');
+        // return $_POST['body'];
     }
 
 
@@ -108,5 +111,84 @@ class WordsController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/score", name="words_score")
+     */
+    public function score(SessionInterface $session)
+    {
+        $userAnswerSession = $session->get('userAnswer');
+        $userAnswer = $userAnswerSession['userAnswer'];
 
+        $answer = $session->get('generatedWords');
+        print_r($userAnswer);
+        echo ' vs ';
+        print_r($answer);
+
+        $answer = str_replace(" ", "", $answer);
+        $userAnswer = str_replace(" ", "", $userAnswer);
+        // echo "-----------";
+        // print_r($userAnswer);
+        // echo ' vs ';
+        // print_r($answer);
+
+        //calculates score v1
+        // $score = 0;
+        // $maxScore = strlen($answer);
+        // for ($i=0; $i < strlen($userAnswer); $i++) { 
+        //     if ($userAnswer[$i] == $answer[$i]) {
+        //         $score++;
+        //     }
+        // }
+
+
+        //calculates score v - array_search
+        $score = 0;
+        $maxScore = strlen($answer);
+        $userAnswArr = str_split($userAnswer);
+        $answArr = str_split($answer);
+        $len = count($userAnswArr);
+        // print_r($userAnswArr);
+        // echo "    " . $len . "  ";
+        // print_r($answArr);
+        for ($i = 0; $i < $len; $i++) {
+            // echo ' '.$userAnswArr[$i];
+            // echo '    '.array_search('lol', $answArr).' next : <br>';
+            // if (array_search('lol', $answArr) == "") {
+            //     echo "loool";
+            // }
+            if (array_search($userAnswArr[$i], $answArr) !== "") {
+                // $score++;
+                //returns position of found word in the answer
+                $numIndex = array_search($userAnswArr[$i], $answArr);
+                // echo ' NUMBE INDEX ' . $numIndex. ' £USERARRAY '.$userAnswArr[$i];
+                //deletes it from the answer array so that it doesnt take in account next time
+                // array_splice($answArr, $wordIndex, 1);
+                unset($answArr[$numIndex]);
+
+
+                // echo "<br><br>";
+                // echo implode("", $userAnswArr);
+                // print_r($userAnswArr);
+                // echo "USER    " . $len . "  ANSWER";
+                // echo implode("", $answArr);
+                // print_r($answArr);
+                // echo "<br>";
+            }
+        }
+        $score = $maxScore - count($answArr);
+        //resplits the answers back to two digits with a space between each for user presentation
+        $strAnswer = chunk_split($answer, 2, ' ');
+        $strUserAnswer = chunk_split($userAnswer, 2, ' ');
+
+
+        return $this->render('words/score.html.twig', [
+            'controller_name' => 'Words score',
+            'userAnswer' => $userAnswer,
+            'answer' => $answer,
+            'score' => $score,
+            'maxScore' => $maxScore,
+            'strUserAnswer' => $strUserAnswer,
+            'strAnswer' => $strAnswer,
+        ]);
+    }
 }
