@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\SetupWordType;
+use App\Form\RecallWordType;
 use App\Repository\WordRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -74,4 +75,38 @@ class WordsController extends AbstractController
             'wordsList' => $wordsList,
         ]);
     }
+
+
+    
+    /**
+     * @Route("/memorise/end", name="words_memorise_end")
+     */
+    public function endMemorise(SessionInterface $session)
+    {
+        return $this->redirectToRoute('words_setup');
+    }
+
+
+    /**
+     * @Route("/recall", name="words_recall")
+     */
+    public function recall(Request $request, SessionInterface $session)
+    {
+
+        $form = $this->createForm(RecallWordType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $session->set('userAnswer', $_POST['recall_word']);
+            return $this->redirectToRoute('words_score');
+        }
+
+
+        return $this->render('words/recall.html.twig', [
+            'controller_name' => 'Words recall',
+            'form' => $form->createView(),
+        ]);
+    }
+
+
 }

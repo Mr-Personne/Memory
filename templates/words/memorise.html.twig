@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello NumbersController!
+{% block title %}Hello wordsController!
 {% endblock %}
 
 {% block body %}
@@ -36,12 +36,12 @@
 		<ul>
 			<li>Your controller at
 				<code>
-					<a href="{{ '/var/www/html/src/Controller/NumbersController.php'|file_link(0) }}">src/Controller/NumbersController.php</a>
+					<a href="{{ '/var/www/html/src/Controller/WordsController.php'|file_link(0) }}">src/Controller/wordsController.php</a>
 				</code>
 			</li>
 			<li>Your template at
 				<code>
-					<a href="{{ '/var/www/html/templates/numbers/index.html.twig'|file_link(0) }}">templates/numbers/index.html.twig</a>
+					<a href="{{ '/var/www/html/templates/words/index.html.twig'|file_link(0) }}">templates/words/index.html.twig</a>
 				</code>
 			</li>
 		</ul>
@@ -71,7 +71,7 @@
 			{% endfor %}
 		</div>
 		<button>
-			<a href="{{ path('words_setup') }}">Ready!</a>
+			<a href="{{ path('words_recall') }}">Ready!</a>
 		</button>
 
 	</div>
@@ -124,7 +124,7 @@ progressBar.style.width = progressPercent + "%";
 timeout = setTimeout(timer, 1000);
 if (minutes === 0 && secondes === 0) { // alert("Time over!");
 clearTimeout(timeout);
-// ajaxCallAsynch("numbers");
+ajaxCallAsynch("words");
 }
 }
 
@@ -151,7 +151,7 @@ return response.text();
 }).then(function (data) {
 console.log("data : ", data);
 if (data != "") {
-location.href = '/numbers/recall';
+location.href = '/words/recall';
 }
 
 
