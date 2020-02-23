@@ -117,19 +117,21 @@ class WordsController extends AbstractController
     public function score(SessionInterface $session)
     {
         $userAnswerSession = $session->get('userAnswer');
-        $userAnswer = $userAnswerSession['userAnswer'];
+        $userAnswer = strtolower($userAnswerSession['userAnswer']);
 
         $answer = $session->get('generatedWords');
-        print_r($userAnswer);
-        echo ' vs ';
-        print_r($answer);
-
-        $answer = str_replace(" ", "", $answer);
-        $userAnswer = str_replace(" ", "", $userAnswer);
-        // echo "-----------";
         // print_r($userAnswer);
         // echo ' vs ';
         // print_r($answer);
+
+        $answer = str_replace(",", " ", $answer);
+        // $userAnswer = str_replace(" ", "", $userAnswer);
+        $userAnswArr = explode(" ", $userAnswer);
+        $answArr = explode(" ", $answer);
+        // echo "-----------";
+        // print_r($userAnswArr);
+        // echo ' vs ';
+        // print_r($answArr);
 
         //calculates score v1
         // $score = 0;
@@ -143,42 +145,37 @@ class WordsController extends AbstractController
 
         //calculates score v - array_search
         $score = 0;
-        $maxScore = strlen($answer);
-        $userAnswArr = str_split($userAnswer);
-        $answArr = str_split($answer);
+        $maxScore = count($answArr);
+        // $userAnswArr = str_split($userAnswer);
+        // $answArr = str_split($answer);
         $len = count($userAnswArr);
         // print_r($userAnswArr);
         // echo "    " . $len . "  ";
         // print_r($answArr);
         for ($i = 0; $i < $len; $i++) {
-            // echo ' '.$userAnswArr[$i];
-            // echo '    '.array_search('lol', $answArr).' next : <br>';
-            // if (array_search('lol', $answArr) == "") {
-            //     echo "loool";
+            
+            
+            // print_r($answArr);
+            //returns position of found word in the answer
+            $wordIndex = array_search($userAnswArr[$i], $answArr);
+            // echo '----- word  INDEX ' . $wordIndex. ' $USERARRAY '.$userAnswArr[$i];
+            //deletes it from the answer array so that it doesnt take in account next time
+            unset($answArr[$wordIndex]);
+            
+            // if (array_search($userAnswArr[$i], $answArr)) {
+            //     //returns position of found word in the answer
+            //     $wordIndex = array_search($userAnswArr[$i], $answArr);
+            //     echo '----- word  INDEX ' . $wordIndex. ' $USERARRAY '.$userAnswArr[$i];
+            //     //deletes it from the answer array so that it doesnt take in account next time
+            //     unset($answArr[$wordIndex]);
             // }
-            if (array_search($userAnswArr[$i], $answArr) !== "") {
-                // $score++;
-                //returns position of found word in the answer
-                $numIndex = array_search($userAnswArr[$i], $answArr);
-                // echo ' NUMBE INDEX ' . $numIndex. ' £USERARRAY '.$userAnswArr[$i];
-                //deletes it from the answer array so that it doesnt take in account next time
-                // array_splice($answArr, $wordIndex, 1);
-                unset($answArr[$numIndex]);
-
-
-                // echo "<br><br>";
-                // echo implode("", $userAnswArr);
-                // print_r($userAnswArr);
-                // echo "USER    " . $len . "  ANSWER";
-                // echo implode("", $answArr);
-                // print_r($answArr);
-                // echo "<br>";
-            }
         }
         $score = $maxScore - count($answArr);
         //resplits the answers back to two digits with a space between each for user presentation
-        $strAnswer = chunk_split($answer, 2, ' ');
-        $strUserAnswer = chunk_split($userAnswer, 2, ' ');
+        // $strAnswer = implode(" ", $answArr);
+        // $strUserAnswer = implode(" ", $userAnswArr);
+        $strAnswer = $answer;
+        $strUserAnswer = $userAnswer ;
 
 
         return $this->render('words/score.html.twig', [
