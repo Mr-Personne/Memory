@@ -169,7 +169,7 @@ class NumbersController extends AbstractController
             // if (array_search('lol', $answArr) == "") {
             //     echo "loool";
             // }
-            if (array_search($userAnswArr[$i], $answArr) !== "") {
+            if (array_search($userAnswArr[$i], $answArr)) {
                 // $score++;
                 //returns position of found number in the answer
                 $numIndex = array_search($userAnswArr[$i], $answArr);
@@ -186,6 +186,13 @@ class NumbersController extends AbstractController
                 // echo implode("", $answArr);
                 // print_r($answArr);
                 // echo "<br>";
+            }
+            elseif (array_search($userAnswArr[$i], $answArr) == 0 && array_search($userAnswArr[$i], $answArr) !== false) {
+                $numIndex = array_search($userAnswArr[$i], $answArr);
+                // echo ' NUMBE INDEX ' . $numIndex. ' £USERARRAY '.$userAnswArr[$i];
+                //deletes it from the answer array so that it doesnt take in account next time
+                // array_splice($answArr, $numberIndex, 1);
+                unset($answArr[$numIndex]);
             }
         }
         $score = $maxScore - count($answArr);
