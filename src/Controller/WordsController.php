@@ -118,12 +118,7 @@ class WordsController extends AbstractController
     {
         $userAnswerSession = $session->get('userAnswer');
         $userAnswer = strtolower($userAnswerSession['userAnswer']);
-
         $answer = $session->get('generatedWords');
-        // print_r($userAnswer);
-        // echo ' vs ';
-        // print_r($answer);
-
         $answer = str_replace(",", " ", $answer);
         // $userAnswer = str_replace(" ", "", $userAnswer);
         $userAnswArr = explode(" ", $userAnswer);
@@ -133,17 +128,6 @@ class WordsController extends AbstractController
         // echo ' vs ';
         // print_r($answArr);
 
-        //calculates score v1
-        // $score = 0;
-        // $maxScore = strlen($answer);
-        // for ($i=0; $i < strlen($userAnswer); $i++) { 
-        //     if ($userAnswer[$i] == $answer[$i]) {
-        //         $score++;
-        //     }
-        // }
-
-
-        //calculates score v - array_search
         $score = 0;
         $maxScore = count($answArr);
         // $userAnswArr = str_split($userAnswer);
@@ -153,29 +137,30 @@ class WordsController extends AbstractController
         // echo "    " . $len . "  ";
         // print_r($answArr);
         for ($i = 0; $i < $len; $i++) {
-            
-            
-            // print_r($answArr);
-            //returns position of found word in the answer
-            $wordIndex = array_search($userAnswArr[$i], $answArr);
-            // echo '----- word  INDEX ' . $wordIndex. ' $USERARRAY '.$userAnswArr[$i];
-            //deletes it from the answer array so that it doesnt take in account next time
-            unset($answArr[$wordIndex]);
-            
-            // if (array_search($userAnswArr[$i], $answArr)) {
-            //     //returns position of found word in the answer
-            //     $wordIndex = array_search($userAnswArr[$i], $answArr);
-            //     echo '----- word  INDEX ' . $wordIndex. ' $USERARRAY '.$userAnswArr[$i];
-            //     //deletes it from the answer array so that it doesnt take in account next time
-            //     unset($answArr[$wordIndex]);
-            // }
+
+            if (array_search($userAnswArr[$i], $answArr)) {
+                echo "coucou";
+                //returns position of found word in the answer
+                $wordIndex = array_search($userAnswArr[$i], $answArr);
+                // echo gettype($wordIndex), "\n";
+                // echo '----- word  INDEX ' . $wordIndex . ' $USERARRAY ' . $userAnswArr[$i];
+                //deletes it from the answer array so that it doesnt take in account next time
+                unset($answArr[$wordIndex]);
+            } elseif (array_search($userAnswArr[$i], $answArr) == 0 && array_search($userAnswArr[$i], $answArr) !== false) {
+                //returns position of found word in the answer
+                $wordIndex = array_search($userAnswArr[$i], $answArr);
+                // echo gettype($wordIndex), "\n";
+                // echo '----- word  INDEX ' . $wordIndex. ' $USERARRAY '.$userAnswArr[$i];
+                //deletes it from the answer array so that it doesnt take in account next time
+                unset($answArr[$wordIndex]);
+            }
         }
         $score = $maxScore - count($answArr);
         //resplits the answers back to two digits with a space between each for user presentation
         // $strAnswer = implode(" ", $answArr);
         // $strUserAnswer = implode(" ", $userAnswArr);
         $strAnswer = $answer;
-        $strUserAnswer = $userAnswer ;
+        $strUserAnswer = $userAnswer;
 
 
         return $this->render('words/score.html.twig', [
