@@ -139,7 +139,6 @@ class WordsController extends AbstractController
         for ($i = 0; $i < $len; $i++) {
 
             if (array_search($userAnswArr[$i], $answArr)) {
-                echo "coucou";
                 //returns position of found word in the answer
                 $wordIndex = array_search($userAnswArr[$i], $answArr);
                 // echo gettype($wordIndex), "\n";
