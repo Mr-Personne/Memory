@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use Faker;
 use App\Entity\Person;
+use App\Entity\Word;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -17,14 +18,17 @@ class AppFixtures extends Fixture
         // on créé 10 personnes
         for ($i = 0; $i < 200; $i++) {
             $person = new Person();
+            // $word = new Word();
+            // $word->setContent($faker->realText(10));
             $person->setFirstName($faker->firstName);
             $person->setLastName($faker->lastName);
             $person->setAddress($faker->streetAddress);
             $person->setTown($faker->city);
             $person->setPostalCode($faker->postcode);
             $person->setAge($faker->numberBetween(18, 100));
-            $person->setEmail($faker->email);
+            $person->setJob($faker->jobTitle);
             $manager->persist($person);
+            // $manager->persist($word);
         }
 
         $manager->flush();

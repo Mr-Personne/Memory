@@ -19,12 +19,12 @@ class Person
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $first_name;
+    private $firstName;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $last_name;
+    private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -37,19 +37,24 @@ class Person
     private $town;
 
     /**
-     * @ORM\Column(type="string", length=15)
+     * @ORM\Column(type="string", length=255)
      */
-    private $postal_code;
-
-    /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     */
-    private $email;
+    private $postalCode;
 
     /**
      * @ORM\Column(type="integer")
      */
     private $age;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $birthDay;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $job;
 
     public function getId(): ?int
     {
@@ -58,24 +63,24 @@ class Person
 
     public function getFirstName(): ?string
     {
-        return $this->first_name;
+        return $this->firstName;
     }
 
-    public function setFirstName(string $first_name): self
+    public function setFirstName(string $firstName): self
     {
-        $this->first_name = $first_name;
+        $this->firstName = $firstName;
 
         return $this;
     }
 
     public function getLastName(): ?string
     {
-        return $this->last_name;
+        return $this->lastName;
     }
 
-    public function setLastName(string $last_name): self
+    public function setLastName(string $lastName): self
     {
-        $this->last_name = $last_name;
+        $this->lastName = $lastName;
 
         return $this;
     }
@@ -106,24 +111,12 @@ class Person
 
     public function getPostalCode(): ?string
     {
-        return $this->postal_code;
+        return $this->postalCode;
     }
 
-    public function setPostalCode(string $postal_code): self
+    public function setPostalCode(string $postalCode): self
     {
-        $this->postal_code = $postal_code;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(?string $email): self
-    {
-        $this->email = $email;
+        $this->postalCode = $postalCode;
 
         return $this;
     }
@@ -136,6 +129,30 @@ class Person
     public function setAge(int $age): self
     {
         $this->age = $age;
+
+        return $this;
+    }
+
+    public function getBirthDay(): ?\DateTimeInterface
+    {
+        return $this->birthDay;
+    }
+
+    public function setBirthDay(?\DateTimeInterface $birthDay): self
+    {
+        $this->birthDay = $birthDay;
+
+        return $this;
+    }
+
+    public function getJob(): ?string
+    {
+        return $this->job;
+    }
+
+    public function setJob(string $job): self
+    {
+        $this->job = $job;
 
         return $this;
     }
