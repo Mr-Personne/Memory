@@ -127,11 +127,11 @@ class WordsController extends AbstractController
         // $userAnswer = str_replace(" ", "", $userAnswer);
         $userAnswArr = explode(" ", $userAnswer);
         $answArr = explode(" ", $answer);
-        echo "-----------";
-        print_r($userAnswArr);
-        echo ' vs ';
-        print_r($answArr);
-        print_r($answer);
+        // echo "-----------";
+        // print_r($userAnswArr);
+        // echo ' vs ';
+        // print_r($answArr);
+        // print_r($answer);
 
         $score = 0;
         $maxScore = count($answArr);
