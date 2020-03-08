@@ -15,14 +15,14 @@ class AppFixtures extends Fixture
         $faker = Faker\Factory::create('fr_FR');
 
         // on créé 10 personnes
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 200; $i++) {
             $person = new Person();
-            $person->setFirstName($faker->name);
-            $person->setLastName($faker->name);
+            $person->setFirstName($faker->firstName);
+            $person->setLastName($faker->lastName);
             $person->setAddress($faker->streetAddress);
             $person->setTown($faker->city);
             $person->setPostalCode($faker->postcode);
-            $person->setAge($faker->text);
+            $person->setAge($faker->numberBetween(18, 100));
             $person->setEmail($faker->email);
             $manager->persist($person);
         }
