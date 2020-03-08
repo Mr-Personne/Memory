@@ -34,7 +34,11 @@ class WordsController extends AbstractController
         $form = $this->createForm(SetupWordType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
+            //user sets time to 0 or less : makes it 5 mins by default
+            if ($_POST['setup_word']['minutes'] <= 0 && $_POST['setup_word']['secondes'] <= 0) {
+                $_POST['setup_word']['minutes'] = 5;
+                $_POST['setup_word']['secondes'] = 0;
+            }
             $session->set('wordQuantity', $_POST['setup_word']['quantity']);
             $session->set('wordMinutes', $_POST['setup_word']['minutes']);
             $session->set('wordSecondes', $_POST['setup_word']['secondes']);
@@ -123,10 +127,11 @@ class WordsController extends AbstractController
         // $userAnswer = str_replace(" ", "", $userAnswer);
         $userAnswArr = explode(" ", $userAnswer);
         $answArr = explode(" ", $answer);
-        // echo "-----------";
-        // print_r($userAnswArr);
-        // echo ' vs ';
-        // print_r($answArr);
+        echo "-----------";
+        print_r($userAnswArr);
+        echo ' vs ';
+        print_r($answArr);
+        print_r($answer);
 
         $score = 0;
         $maxScore = count($answArr);

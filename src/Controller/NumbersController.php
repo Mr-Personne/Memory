@@ -38,15 +38,11 @@ class NumbersController extends AbstractController
         $form = $this->createForm(SetupNumberType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            // $form->getData() holds the submitted values
-            // but, the original `$task` variable has also been updated
-            // $task = $form->getData();
-
-            // ... perform some action, such as saving the task to the database
-            // for example, if Task is a Doctrine entity, save it!
-            // $entityManager = $this->getDoctrine()->getManager();
-            // $entityManager->persist($task);
-            // $entityManager->flush();
+            //user sets time to 0 or less : makes it 5 mins by default
+            if ($_POST['setup_number']['minutes'] <= 0 && $_POST['setup_number']['secondes'] <= 0) {
+                $_POST['setup_number']['minutes'] = 5;
+                $_POST['setup_number']['secondes'] = 0;
+            }
             $session->set('numQuantity', $_POST['setup_number']['quantity']);
             $session->set('numMinutes', $_POST['setup_number']['minutes']);
             $session->set('numSecondes', $_POST['setup_number']['secondes']);
