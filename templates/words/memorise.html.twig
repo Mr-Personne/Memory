@@ -25,12 +25,12 @@
 			{{ controller_name }}! ✅</h2>
 
 		{# {% for item in session %}
-				        <p>{{ item }}</p>
-				    {% endfor %} #}
+						        <p>{{ item }}</p>
+						    {% endfor %} #}
 
 		{# <p>numQuantity : {{ numQuantity }}</p>
-				    <p>numMinutes : {{ numMinutes }}</p>
-				    <p>numSecondes : {{ numSecondes }}</p> #}
+						    <p>numMinutes : {{ numMinutes }}</p>
+						    <p>numSecondes : {{ numSecondes }}</p> #}
 
 		This friendly message is coming from:
 		<ul>
@@ -73,8 +73,8 @@
 				</script>
 			{% endfor %}
 		</div>
-		<button>
-			<a href="{{ path('words_recall') }}">Ready!</a>
+		<button id="ready-btn">
+			Ready!
 		</button>
 
 	</div>
@@ -84,101 +84,102 @@
 
 
 		var minutes = {{ wordMinutes }};
-		var secondes = {{ wordSecondes }};
-		const fullTimeInSecondes = (minutes * 60) + secondes;
-		var timeout;
+var secondes = {{ wordSecondes }};
+const fullTimeInSecondes = (minutes * 60) + secondes;
+var timeout;
 
-		function timer() {
+function timer() {
 
-		if (secondes === 0) {
-		minutes = minutes - 1;
-		secondes = 60;
-		}
-		secondes = secondes - 1;
+if (secondes === 0) {
+minutes = minutes - 1;
+secondes = 60;
+}
+secondes = secondes - 1;
 
-		// stringy minutes for extra zero in front
-		if (minutes < 10) {
-		var stringyMins = "0" + minutes;
-		} else {
-		var stringyMins = minutes;
-		}
+// stringy minutes for extra zero in front
+if (minutes < 10) {
+var stringyMins = "0" + minutes;
+} else {
+var stringyMins = minutes;
+}
 
-		// stringy secondes for extra zero in front
-		if (secondes < 10) {
-		var stringySecs = "0" + secondes;
-		} else {
-		var stringySecs = secondes;
-		}
-
-
-		var minDisplay = document.querySelector(".minutes-display");
-		minDisplay.innerText = stringyMins;
-
-		var secDisplay = document.querySelector(".secondes-display");
-		secDisplay.innerText = stringySecs;
-
-		var currentFullTimeInSecondes = (minutes * 60) + secondes;
-		var progressPercent = (currentFullTimeInSecondes * 100) / fullTimeInSecondes;
-		// console.log(progressPercent);
-		var progressBar = document.querySelector(".progress-bar");
-		progressBar.style.width = progressPercent + "%";
+// stringy secondes for extra zero in front
+if (secondes < 10) {
+var stringySecs = "0" + secondes;
+} else {
+var stringySecs = secondes;
+}
 
 
-		timeout = setTimeout(timer, 1000);
-		if (minutes === 0 && secondes === 0) { // alert("Time over!");
-		clearTimeout(timeout);
-		ajaxCallAsynch("words", generatedWords);
-		}
-		}
+var minDisplay = document.querySelector(".minutes-display");
+minDisplay.innerText = stringyMins;
+
+var secDisplay = document.querySelector(".secondes-display");
+secDisplay.innerText = stringySecs;
+
+var currentFullTimeInSecondes = (minutes * 60) + secondes;
+var progressPercent = (currentFullTimeInSecondes * 100) / fullTimeInSecondes;
+// console.log(progressPercent);
+var progressBar = document.querySelector(".progress-bar");
+progressBar.style.width = progressPercent + "%";
 
 
-		// ajax
-		function ajaxCallAsynch(section, generatedWords) { // console.dir(myForm);
-		console.log('section : ', section);
-		console.log('generatedWords : ', generatedWords);
-
-		console.log(section);
-		
-		if (section === undefined) {
-			console.log("end ajax default ", section);
-			return;
-		} 
-		else {
-		console.log("coucou ajax");
-		}
-
-		var formData = new FormData();
-		formData.append("data", generatedWords);
-		var jsonString = JSON.stringify(generatedWords);
-		var myInit = { 
-			method: 'POST',
-			body: formData
-			};
+timeout = setTimeout(timer, 1000);
+if (minutes === 0 && secondes === 0) { // alert("Time over!");
+clearTimeout(timeout);
+ajaxCallAsynch("words", generatedWords);
+}
+}
 
 
-		fetch (`/${section}/memorise/end`, myInit).then(function (response) {
+// ajax
+function ajaxCallAsynch(section, generatedWords) { // console.dir(myForm);
+console.log('section : ', section);
+console.log('generatedWords : ', generatedWords);
 
-		console.dir(response);
-		return response.text();
+console.log(section);
 
-		}).then(function (data) {
-		console.log("data : ", data);
-		if (data != "") { 
-			location.href = '/words/recall';
-			console.log("redirect");
-			console.log('generatedWords : ', generatedWords);
+if (section === undefined) {
+console.log("end ajax default ", section);
+return;
+} else {
+console.log("coucou ajax");
+}
 
-		}
-
-
-		});
-
-
-		}
-
-		// END AJAX
+var formData = new FormData();
+formData.append("data", generatedWords);
+var jsonString = JSON.stringify(generatedWords);
+var myInit = {
+method: 'POST',
+body: formData
+};
 
 
-		timer();
+fetch (`/${section}/memorise/end`, myInit).then(function (response) {
+
+console.dir(response);
+return response.text();
+
+}).then(function (data) {
+console.log("data : ", data);
+if (data != "") {
+location.href = '/words/recall';
+console.log("redirect");
+console.log('generatedWords : ', generatedWords);
+
+}
+
+
+});
+
+
+}
+
+// END AJAX
+document.querySelector('#ready-btn').addEventListener('click', () => {
+	ajaxCallAsynch("words", generatedWords);
+});
+
+timer();
 	</script>
 {% endblock %}
