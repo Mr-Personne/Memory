@@ -41,18 +41,18 @@ class PeopleController extends AbstractController
             $session->set('peopleQuantity', $_POST['setup_people']['quantity']);
             $session->set('peopleMinutes', $_POST['setup_people']['minutes']);
             $session->set('peopleSecondes', $_POST['setup_people']['secondes']);
-            return $this->redirectToRoute('peoples_memorise');
+            return $this->redirectToRoute('people_memorise');
         }
 
         return $this->render('people/setup.html.twig', [
-            'controller_name' => 'peoples Setup',
+            'controller_name' => 'people Setup',
             'form' => $form->createView(),
 
         ]);
     }
 
     /**
-     * @Route("/memorise", name="words_memorise")
+     * @Route("/memorise", name="people_memorise")
      */
     public function memorise(SessionInterface $session, PersonRepository $PersonRepository)
     {
@@ -76,6 +76,39 @@ class PeopleController extends AbstractController
             'peopleMinutes' => $session->get('peopleMinutes'),
             'peopleSecondes' => $session->get('peopleSecondes'),
             'peopleList' => $peopleList,
+        ]);
+    }
+
+    /**
+     * @Route("/memorise/end", name="people_memorise_end")
+     */
+    public function endMemorise(SessionInterface $session)
+    {
+        $session->set('generatedPeople', $_POST['data']);
+        // print_r($_POST);
+        return $this->redirectToRoute('people_memorise');
+        // return $_POST['body'];
+    }
+
+
+    /**
+     * @Route("/recall", name="people_recall")
+     */
+    public function recall(Request $request, SessionInterface $session)
+    {
+
+        $form = $this->createForm(RecallWordType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $session->set('userAnswer', $_POST['recall_word']);
+            return $this->redirectToRoute('people_score');
+        }
+
+
+        return $this->render('people/recall.html.twig', [
+            'controller_name' => 'People recall',
+            'form' => $form->createView(),
         ]);
     }
 }
