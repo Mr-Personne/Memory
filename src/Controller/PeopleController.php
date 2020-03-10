@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
+use App\Form\SetupPeopleType;
+use App\Repository\PersonRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/people")
@@ -42,10 +44,38 @@ class PeopleController extends AbstractController
             return $this->redirectToRoute('peoples_memorise');
         }
 
-        return $this->render('peoples/setup.html.twig', [
+        return $this->render('people/setup.html.twig', [
             'controller_name' => 'peoples Setup',
             'form' => $form->createView(),
 
+        ]);
+    }
+
+    /**
+     * @Route("/memorise", name="words_memorise")
+     */
+    public function memorise(SessionInterface $session, PersonRepository $PersonRepository)
+    {
+        $peopleList = $PersonRepository->findAll();
+        shuffle($peopleList);
+        // print_r($wordsList);
+        // $randWordLen = $session->get('wordQuantity');
+        // // $setWords = 1;
+        // $wordsArray = array();
+        // $wordsDisplay = "";
+        // for ($i = 0; $i < $randWordLen; $i++) {
+        //     $randIndex = rand(0, 500);
+        //     array_push($wordsArray, $wordsList[$randIndex]);
+        //     $wordsDisplay .= $wordsList[$randIndex] . " ";
+
+        // }
+        // $session->set('generatedNums', $generatedNums);
+        return $this->render('people/memorise.html.twig', [
+            'controller_name' => 'people memorise',
+            'peopleQuantity' => $session->get('peopleQuantity'),
+            'peopleMinutes' => $session->get('peopleMinutes'),
+            'peopleSecondes' => $session->get('peopleSecondes'),
+            'peopleList' => $peopleList,
         ]);
     }
 }
