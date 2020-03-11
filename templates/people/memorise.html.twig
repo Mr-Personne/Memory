@@ -63,8 +63,10 @@
 		<div class="d-flex flex-wrap mb-3">
 			<script>
 				var generatedPeople = [];
+				var person = [];
 			</script>
-			{% set person = '' %}
+			{% set person = [] %}
+			{% set personfirstName = '' %}
 			{% for i in range(1, peopleQuantity) %}
 			<ul>
 				<li>{{peopleList[i].firstName}} {{peopleList[i].lastName}}</li>
@@ -72,13 +74,24 @@
 				<li>{{peopleList[i].town}}, {{peopleList[i].postalCode}}</li>
 				<li>{{peopleList[i].job}}</li>
 			</ul>
-				{# <span>
-					{{peopleList[i].content}}
-				</span> #}
-				{% set person = peopleList[i].firstName %}
+			
+				{% set person = [] %}
+				{% set personKey = i %}
+				{% set personFirstName = peopleList[i].firstName %}
+				{% set personLastName = peopleList[i].lastName %}
+				{% set personAddress = peopleList[i].address %}
+				{% set personTown = peopleList[i].town %}
+				{% set personPostalCode = peopleList[i].postalCode %}
+				{% set personJob = peopleList[i].job %}
 				<script>
-					generatedPeople.push("{{ person }}");
-// console.log(generatedWords);
+					person.push("{{ personFirstName }}");
+					person.push("{{ personLastName }}");
+					person.push("{{ personAddress }}");
+					person.push("{{ personTown }}");
+					person.push("{{ personPostalCode }}");
+					person.push("{{ personJob }}");
+					generatedPeople["{{ personKey }}"] = person;
+					person = [];
 				</script>
 			{% endfor %}
 		</div>
@@ -90,7 +103,7 @@
 
 
 	<script>
-
+		console.log('generatedPeople : ', generatedPeople);
 
 		var minutes = {{ peopleMinutes }};
 		var secondes = {{ peopleSecondes }};
@@ -156,8 +169,8 @@
 		}
 
 		var formData = new FormData();
-		formData.append("data", generatedPeople);
 		var jsonString = JSON.stringify(generatedPeople);
+		formData.append("data", jsonString);
 		var myInit = {
 		method: 'POST',
 		body: formData
