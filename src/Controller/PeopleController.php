@@ -97,18 +97,19 @@ class PeopleController extends AbstractController
     public function recall(Request $request, SessionInterface $session)
     {
 
-        $form = $this->createForm(RecallWordType::class);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        // $form = $this->createForm(RecallWordType::class);
+        // $form->handleRequest($request);
+        // if ($form->isSubmitted() && $form->isValid()) {
 
-            $session->set('userAnswer', $_POST['recall_word']);
-            return $this->redirectToRoute('people_score');
-        }
-
+        //     $session->set('userAnswer', $_POST['recall_word']);
+        //     return $this->redirectToRoute('people_score');
+        // }
+        $answer = $session->get('generatedPeople');
+        print_r($answer);
 
         return $this->render('people/recall.html.twig', [
             'controller_name' => 'People recall',
-            'form' => $form->createView(),
+            // 'form' => $form->createView(),
         ]);
     }
 }
