@@ -8,6 +8,7 @@ use App\Form\PeopleCollectionType;
 use App\Repository\PersonRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -96,11 +97,12 @@ class PeopleController extends AbstractController
     /**
      * @Route("/recall", name="people_recall")
      */
-    public function recall(Request $request, SessionInterface $session)
+    public function recall(Request $request)
     {
 
-        // $form = $this->createForm(RecallPeopleType::class);
-        $form = $this->createForm(PeopleCollectionType::class);
+        $session = $request->getSession();
+        $form = $this->createForm(RecallPeopleType::class);
+        // $form = $this->createForm(PeopleCollectionType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
