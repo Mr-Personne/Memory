@@ -43,29 +43,29 @@
 
 		<p>What did you memorise?</p>
 		{# <input type="text">
-						    <button><a href="{{ path('words_score') }}">Answer!</a></button> #}
-
-		{% for i in range(1, peopleQuantity) %}
-		<pre>
-        {{ dump(form) }}
-        </pre>
+								    <button><a href="{{ path('words_score') }}">Answer!</a></button> #}
         {{form(form)}}
+		{% for i in range(1, peopleQuantity) %}
+			<pre>
+        {# {{ dump(form) }} #}
+        </pre>
+		{# {{form(form)}} #}
 			{# {{ form_start(form, { attr:{ novalidate:'novalidate'} } ) }}
-						<div>
-							{{ form_errors(form) }}
-						</div>
-						<div>
-							{{ form_errors(form.firstName) }}
-							{{ form_label(form.firstName, "First name??? :") }}
-							{{ form_widget(form.firstName, { attr:{ class:'ghfghgdh hrthgh'} }) }}
-						</div> #}
+									<div>
+										{{ form_errors(form) }}
+									</div>
+									<div>
+										{{ form_errors(form.firstName) }}
+										{{ form_label(form.firstName, "First name??? :") }}
+										{{ form_widget(form.firstName, { attr:{ class:'ghfghgdh hrthgh'} }) }}
+									</div> #}
 
 
 		{% endfor %}
 		{# <div>
-					{{ form_widget(form._token) }}
-					{{ form_widget(form.Answer, { label: 'Ajouter' }) }}
-				</div> #}
+							{{ form_widget(form._token) }}
+							{{ form_widget(form.Answer, { label: 'Ajouter' }) }}
+						</div> #}
 	{# don't render unrendered fields #}
 		{# {{ form_end(form, {'render_rest': false}) }} #}
 
