@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Form\SetupPeopleType;
+use App\Form\RecallPeopleType;
+use App\Form\PeopleCollectionType;
 use App\Repository\PersonRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -97,19 +99,24 @@ class PeopleController extends AbstractController
     public function recall(Request $request, SessionInterface $session)
     {
 
-        // $form = $this->createForm(RecallWordType::class);
-        // $form->handleRequest($request);
-        // if ($form->isSubmitted() && $form->isValid()) {
+        // $form = $this->createForm(RecallPeopleType::class);
+        $form = $this->createForm(PeopleCollectionType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
 
-        //     $session->set('userAnswer', $_POST['recall_word']);
-        //     return $this->redirectToRoute('people_score');
-        // }
-        $answer = $session->get('generatedPeople');
+            $session->set('userAnswer', $_POST['recall_people']);
+            return $this->redirectToRoute('people_score');
+        }
+        $jsonAnswer = $session->get('generatedPeople');
+        $answer = json_decode($jsonAnswer, true);
         print_r($answer);
+        $peopleQuantity = intval($session->get('peopleQuantity'));
+        // print_r($peopleQuantity);
 
         return $this->render('people/recall.html.twig', [
             'controller_name' => 'People recall',
-            // 'form' => $form->createView(),
+            'form' => $form->createView(),
+            'peopleQuantity' => $peopleQuantity,
         ]);
     }
 }
