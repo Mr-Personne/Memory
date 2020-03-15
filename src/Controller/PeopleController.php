@@ -97,10 +97,10 @@ class PeopleController extends AbstractController
     /**
      * @Route("/recall", name="people_recall")
      */
-    public function recall(Request $request)
+    public function recall(Request $request, SessionInterface $session)
     {
 
-        $session = $request->getSession();
+        // $session = $request->getSession();
 
         $jsonAnswer = $session->get('generatedPeople');
         $answer = json_decode($jsonAnswer, true);
@@ -122,6 +122,79 @@ class PeopleController extends AbstractController
             'controller_name' => 'People recall',
             'form' => $form->createView(),
             'peopleQuantity' => $peopleQuantity,
+        ]);
+    }
+
+    /**
+     * @Route("/recall/another", name="recall_another_person")
+     */
+    public function recallAnother(SessionInterface $session)
+    {
+        //ajax sends form info here on button click "another"
+        //session var that contains number of people recalled up until now (starts at one then ++ at the end)
+        //adds to session $session->set('generatedPeople' + $currPersonNum, $_POST['data'])
+        //then send back form (?) to ajax to resend info
+        //when you're finished, click on answer
+
+        // $session->set('generatedPeople', $_POST['data']);
+        // print_r($_POST);
+        // return $this->redirectToRoute('people_memorise');
+        // return $_POST['body'];
+    }
+
+    /**
+     * @Route("/score", name="people_score")
+     */
+    public function score(SessionInterface $session)
+    {
+        $userAnswerSession = $session->get('userAnswer');
+        print_r($userAnswerSession);
+        $userAnswer = strtolower($userAnswerSession['userAnswer']);
+        // $answer = $session->get('generatedPeople');
+        // $answer = str_replace(",", " ", $answer);
+        // // $userAnswer = str_replace(" ", "", $userAnswer);
+        // $userAnswArr = explode(" ", $userAnswer);
+        // $answArr = explode(" ", $answer);
+        // echo "-----------";
+        // print_r($userAnswArr);
+        // echo ' vs ';
+        // print_r($answArr);
+        // print_r($answer);
+
+        // $score = 0;
+        // $maxScore = count($answArr);
+        
+        // $len = count($userAnswArr);
+        // // print_r($userAnswArr);
+        // // echo "    " . $len . "  ";
+        // // print_r($answArr);
+        // for ($i = 0; $i < $len; $i++) {
+
+        //     if (array_search($userAnswArr[$i], $answArr)) {
+        //         //returns position of found word in the answer
+        //         $wordIndex = array_search($userAnswArr[$i], $answArr);
+        //         //deletes it from the answer array so that it doesnt take in account next time
+        //         unset($answArr[$wordIndex]);
+        //     } elseif (array_search($userAnswArr[$i], $answArr) == 0 && array_search($userAnswArr[$i], $answArr) !== false) {
+        //         //returns position of found word in the answer
+        //         $wordIndex = array_search($userAnswArr[$i], $answArr);
+        //         //deletes it from the answer array so that it doesnt take in account next time
+        //         unset($answArr[$wordIndex]);
+        //     }
+        // }
+        // $score = $maxScore - count($answArr);
+        // $strAnswer = $answer;
+        // $strUserAnswer = $userAnswer;
+
+
+        return $this->render('people/score.html.twig', [
+            'controller_name' => 'People score',
+            // 'userAnswer' => $userAnswer,
+            // 'answer' => $answer,
+            // 'score' => $score,
+            // 'maxScore' => $maxScore,
+            // 'strUserAnswer' => $strUserAnswer,
+            // 'strAnswer' => $strAnswer,
         ]);
     }
 }

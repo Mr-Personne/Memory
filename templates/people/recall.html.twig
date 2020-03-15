@@ -42,13 +42,10 @@
     </pre>
 
 		<p>What did you memorise?</p>
-		{# <input type="text">
-								    <button><a href="{{ path('words_score') }}">Answer!</a></button> #}
+
         {{form(form)}}
+		<button><a href="{{ path('recall_another_person') }}">Astuces</a></button>
 		{% for i in range(1, peopleQuantity) %}
-			<pre>
-        {# {{ dump(form) }} #}
-        </pre>
 		{# {{form(form)}} #}
 			{# {{ form_start(form, { attr:{ novalidate:'novalidate'} } ) }}
 									<div>
