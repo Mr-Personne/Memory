@@ -101,20 +101,23 @@ class PeopleController extends AbstractController
     {
 
         $session = $request->getSession();
-        $form = $this->createForm(RecallPeopleType::class);
-        // $form = $this->createForm(PeopleCollectionType::class);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
 
-            $session->set('userAnswer', $_POST['recall_people']);
-            return $this->redirectToRoute('people_score');
-        }
         $jsonAnswer = $session->get('generatedPeople');
         $answer = json_decode($jsonAnswer, true);
         print_r($answer);
         $peopleQuantity = intval($session->get('peopleQuantity'));
         // print_r($peopleQuantity);
 
+        $form = $this->createForm(RecallPeopleType::class, null, [
+            'peopleFormQuantity' => $peopleQuantity,
+        ]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $session->set('userAnswer', $_POST['recall_people']);
+            return $this->redirectToRoute('people_score');
+        }
+        
         return $this->render('people/recall.html.twig', [
             'controller_name' => 'People recall',
             'form' => $form->createView(),
