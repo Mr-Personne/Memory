@@ -20,14 +20,14 @@ class RecallPeopleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstName')
-            ->add('lastName')
-            ->add('address')
-            ->add('town')
-            ->add('postalCode')
-            ->add('age')
+            ->add('firstName',TextType::class,['required'=>false])
+            ->add('lastName',TextType::class,['required'=>false])
+            ->add('address',TextType::class,['required'=>false])
+            ->add('town',TextType::class,['required'=>false])
+            ->add('postalCode',TextType::class,['required'=>false])
+            ->add('age',TextType::class,['required'=>false])
             // ->add('birthDay')
-            ->add('job')
+            ->add('job',TextType::class,['required'=>false])
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 
                 $form = $event->getForm();
@@ -36,16 +36,17 @@ class RecallPeopleType extends AbstractType
                 if ($peopleQuantity > 1) {
                     for ($i=2; $i <= $peopleQuantity; $i++) { 
                         $form
-                            ->add('firstName'.$i)
-                            ->add('lastName'.$i)
-                            ->add('address'.$i)
-                            ->add('town'.$i)
-                            ->add('postalCode'.$i)
-                            ->add('age'.$i)
-                            ->add('job'.$i);
+                            ->add('firstName'.$i,TextType::class,['required'=>false])
+                            ->add('lastName'.$i,TextType::class,['required'=>false])
+                            ->add('address'.$i,TextType::class,['required'=>false])
+                            ->add('town'.$i,TextType::class,['required'=>false])
+                            ->add('postalCode'.$i,TextType::class,['required'=>false])
+                            ->add('age'.$i,TextType::class,['required'=>false])
+                            ->add('job'.$i,TextType::class,['required'=>false]);
                     }
                 }
-            });
+            })
+            ->add('Answer!', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
