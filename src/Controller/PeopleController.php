@@ -100,13 +100,13 @@ class PeopleController extends AbstractController
     public function recall(Request $request, SessionInterface $session)
     {
 
-        // $session = $request->getSession();
+        $session->set('userPersonIndex', 1);
 
         $jsonAnswer = $session->get('generatedPeople');
         $answer = json_decode($jsonAnswer, true);
         print_r($answer);
         $peopleQuantity = intval($session->get('peopleQuantity'));
-        // print_r($peopleQuantity);
+        
 
         $form = $this->createForm(RecallPeopleType::class, null, [
             'peopleFormQuantity' => $peopleQuantity,
@@ -136,8 +136,13 @@ class PeopleController extends AbstractController
         //then send back form (?) to ajax to resend info
         //when you're finished, click on answer
 
-        // $session->set('generatedPeople', $_POST['data']);
-        // print_r($_POST);
+        // print_r($_POST['recall_people']);
+        // $currNum = $session->get('userPersonIndex');
+        // $session->set('userAnswer'.$currNum, $_POST['recall_people']);
+        // $currNum++;
+        // $session->set('userPersonIndex', $currNum);
+        // print_r($session);
+        
         // return $this->redirectToRoute('people_memorise');
         // return $_POST['body'];
     }
