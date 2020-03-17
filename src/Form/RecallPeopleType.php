@@ -28,25 +28,26 @@ class RecallPeopleType extends AbstractType
             ->add('age',TextType::class,['required'=>false])
             // ->add('birthDay')
             ->add('job',TextType::class,['required'=>false])
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            // ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 
-                $form = $event->getForm();
-                $peopleQuantity = $form->getConfig()->getOption('peopleFormQuantity');
+            //     $form = $event->getForm();
+            //     $peopleQuantity = $form->getConfig()->getOption('peopleFormQuantity');
 
-                if ($peopleQuantity > 1) {
-                    for ($i=2; $i <= $peopleQuantity; $i++) { 
-                        $form
-                            ->add('firstName'.$i,TextType::class,['required'=>false])
-                            ->add('lastName'.$i,TextType::class,['required'=>false])
-                            ->add('address'.$i,TextType::class,['required'=>false])
-                            ->add('town'.$i,TextType::class,['required'=>false])
-                            ->add('postalCode'.$i,TextType::class,['required'=>false])
-                            ->add('age'.$i,TextType::class,['required'=>false])
-                            ->add('job'.$i,TextType::class,['required'=>false]);
-                    }
-                }
-            })
-            ->add('Answer!', SubmitType::class);
+            //     if ($peopleQuantity > 1) {
+            //         for ($i=2; $i <= $peopleQuantity; $i++) { 
+            //             $form
+            //                 ->add('firstName'.$i,TextType::class,['required'=>false])
+            //                 ->add('lastName'.$i,TextType::class,['required'=>false])
+            //                 ->add('address'.$i,TextType::class,['required'=>false])
+            //                 ->add('town'.$i,TextType::class,['required'=>false])
+            //                 ->add('postalCode'.$i,TextType::class,['required'=>false])
+            //                 ->add('age'.$i,TextType::class,['required'=>false])
+            //                 ->add('job'.$i,TextType::class,['required'=>false]);
+            //         }
+            //     }
+            // })
+            ->add('Answer!', SubmitType::class)
+            ->add('recall-more', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
