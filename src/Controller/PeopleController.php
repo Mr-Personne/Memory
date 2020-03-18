@@ -32,7 +32,7 @@ class PeopleController extends AbstractController
      */
     public function setup(Request $request, SessionInterface $session)
     {
-
+        // $session->clear();
         $form = $this->createForm(SetupPeopleType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -99,14 +99,16 @@ class PeopleController extends AbstractController
      */
     public function recall(Request $request, SessionInterface $session)
     {
-
-        $session->set('userPersonIndex', 1);
+        if ($session->has('userPersonIndex') == false) {
+            $session->set('userPersonIndex', 1);
+        }
+        
 
         $jsonAnswer = $session->get('generatedPeople');
         $answer = json_decode($jsonAnswer, true);
         print_r($answer);
         $peopleQuantity = intval($session->get('peopleQuantity'));
-        
+
 
         $form = $this->createForm(RecallPeopleType::class, null, [
             'peopleFormQuantity' => $peopleQuantity,
@@ -114,10 +116,13 @@ class PeopleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $session->set('userAnswer', $_POST['recall_people']);
+            $currNum = $session->get('userPersonIndex');
+            $session->set('userAnswer' . $currNum, $_POST['recall_people']);
+            $currNum++;
+            $session->set('userPersonIndex', $currNum);
             return $this->redirectToRoute('people_score');
         }
-        
+
         return $this->render('people/recall.html.twig', [
             'controller_name' => 'People recall',
             'form' => $form->createView(),
@@ -137,14 +142,14 @@ class PeopleController extends AbstractController
         //when you're finished, click on answer
 
         // print_r($_POST['recall_people']);
-        // $currNum = $session->get('userPersonIndex');
-        // $session->set('userAnswer'.$currNum, $_POST['recall_people']);
-        // $currNum++;
-        // $session->set('userPersonIndex', $currNum);
-        // print_r($session);
-        
+        $currNum = $session->get('userPersonIndex');
+        $session->set('userAnswer' . $currNum, $_POST['recall_people']);
+        $currNum++;
+        $session->set('userPersonIndex', $currNum);
+        print_r($session);
+
         // return $this->redirectToRoute('people_memorise');
-        // return $_POST['body'];
+        return $this->redirectToRoute('people_recall');
     }
 
     /**
@@ -152,9 +157,36 @@ class PeopleController extends AbstractController
      */
     public function score(SessionInterface $session)
     {
-        $userAnswerSession = $session->get('userAnswer');
-        print_r($userAnswerSession);
-        $userAnswer = strtolower($userAnswerSession['userAnswer']);
+        $jsonAnswer = $session->get('generatedPeople');
+        $answer = json_decode($jsonAnswer, true);
+        $test2 = $session->get('userAnswer0');
+        $currNum = $session->get('userPersonIndex');
+        $session->set('loltest', "cou cou test");
+        print_r($answer);
+        echo "<br><br>";
+        print_r($test2);
+        echo "<br><br>";
+        print_r($currNum);
+
+        $userAnswArr = array();
+        for ($i=1; $i < $currNum; $i++) { 
+            $currUserAnswer = $session->get('userAnswer'.$i);
+            $userAnswArr[$i] = $currUserAnswer;
+        }
+
+        echo "<br><br>";
+        print_r($userAnswArr);
+        
+        $testlol = $session->get('loltest');
+        echo "<br><br>";
+        print_r($testlol);
+        echo "<br><br>";
+        print_r($answer[1]);
+        echo "<br>VS<br>";
+        print_r($userAnswArr[1]);
+        // $userAnswerSession = $session->get('userAnswer');
+        // print_r($userAnswerSession);
+        // $userAnswer = strtolower($userAnswerSession['userAnswer']);
         // $answer = $session->get('generatedPeople');
         // $answer = str_replace(",", " ", $answer);
         // // $userAnswer = str_replace(" ", "", $userAnswer);
@@ -168,7 +200,7 @@ class PeopleController extends AbstractController
 
         // $score = 0;
         // $maxScore = count($answArr);
-        
+
         // $len = count($userAnswArr);
         // // print_r($userAnswArr);
         // // echo "    " . $len . "  ";
