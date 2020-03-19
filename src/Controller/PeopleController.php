@@ -102,7 +102,8 @@ class PeopleController extends AbstractController
         if ($session->has('userPersonIndex') == false) {
             $session->set('userPersonIndex', 1);
         }
-        
+        $userPersonIndex = $session->get('userPersonIndex');
+
 
         $jsonAnswer = $session->get('generatedPeople');
         $answer = json_decode($jsonAnswer, true);
@@ -127,6 +128,7 @@ class PeopleController extends AbstractController
             'controller_name' => 'People recall',
             'form' => $form->createView(),
             'peopleQuantity' => $peopleQuantity,
+            'userPersonIndex' => $userPersonIndex,
         ]);
     }
 
@@ -169,14 +171,14 @@ class PeopleController extends AbstractController
         print_r($currNum);
 
         $userAnswArr = array();
-        for ($i=1; $i < $currNum; $i++) { 
-            $currUserAnswer = $session->get('userAnswer'.$i);
+        for ($i = 1; $i < $currNum; $i++) {
+            $currUserAnswer = $session->get('userAnswer' . $i);
             $userAnswArr[$i] = $currUserAnswer;
         }
 
         echo "<br><br>";
         print_r($userAnswArr);
-        
+
         $testlol = $session->get('loltest');
         echo "<br><br>";
         print_r($testlol);
@@ -198,28 +200,28 @@ class PeopleController extends AbstractController
         // print_r($answArr);
         // print_r($answer);
 
-        // $score = 0;
-        // $maxScore = count($answArr);
+        $score = 0;
+        $maxScore = count($answer) - 1;
 
-        // $len = count($userAnswArr);
+        $len = count($answer);
+        echo "<br><br>";
+        print_r($len);
         // // print_r($userAnswArr);
         // // echo "    " . $len . "  ";
         // // print_r($answArr);
-        // for ($i = 0; $i < $len; $i++) {
-
-        //     if (array_search($userAnswArr[$i], $answArr)) {
-        //         //returns position of found word in the answer
-        //         $wordIndex = array_search($userAnswArr[$i], $answArr);
-        //         //deletes it from the answer array so that it doesnt take in account next time
-        //         unset($answArr[$wordIndex]);
-        //     } elseif (array_search($userAnswArr[$i], $answArr) == 0 && array_search($userAnswArr[$i], $answArr) !== false) {
-        //         //returns position of found word in the answer
-        //         $wordIndex = array_search($userAnswArr[$i], $answArr);
-        //         //deletes it from the answer array so that it doesnt take in account next time
-        //         unset($answArr[$wordIndex]);
-        //     }
-        // }
-        // $score = $maxScore - count($answArr);
+        for ($i = 1; $i < $len; $i++) {
+            if (strtolower($answer[$i][0]) == strtolower($userAnswArr[$i]["firstName"])
+                && strtolower($answer[$i][1]) == strtolower($userAnswArr[$i]["lastName"])
+                && strtolower($answer[$i][2]) == strtolower($userAnswArr[$i]["address"])
+                && strtolower($answer[$i][3]) == strtolower($userAnswArr[$i]["town"])
+                && strtolower($answer[$i][4]) == strtolower($userAnswArr[$i]["postalCode"])
+                && strtolower($answer[$i][5]) == strtolower($userAnswArr[$i]["job"])
+                && strtolower($answer[$i][6]) == strtolower($userAnswArr[$i]["age"])
+            ) {
+                $score++;
+            }
+        }
+        // $score = $maxScore - count($answer);
         // $strAnswer = $answer;
         // $strUserAnswer = $userAnswer;
 
@@ -227,9 +229,9 @@ class PeopleController extends AbstractController
         return $this->render('people/score.html.twig', [
             'controller_name' => 'People score',
             // 'userAnswer' => $userAnswer,
-            // 'answer' => $answer,
-            // 'score' => $score,
-            // 'maxScore' => $maxScore,
+            'answer' => $answer,
+            'score' => $score,
+            'maxScore' => $maxScore,
             // 'strUserAnswer' => $strUserAnswer,
             // 'strAnswer' => $strAnswer,
         ]);
