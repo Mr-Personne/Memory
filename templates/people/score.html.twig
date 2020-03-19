@@ -20,16 +20,16 @@
 
     
 
-    {# <p>Score :</p>
+    <p>Score :</p>
     <p>{{score}}/{{maxScore}}</p>
     <p>The Answer :</p>
-    <p>{{strAnswer}}</p>
+    {# <p>{{strAnswer}}</p> #}
     <p>Your Answer :</p>
-    <p>{{strUserAnswer}}</p>
-    <button><a href="{{ path('words_memorise') }}">Redo</a></button>
-    <button><a href="{{ path('words_setup') }}">Re-setup</a></button>
+    {# <p>{{strUserAnswer}}</p> #}
+    <button><a href="{{ path('people_memorise') }}">Redo</a></button>
+    <button><a href="{{ path('people_setup') }}">Re-setup</a></button>
     <button><a href="{{ path('default') }}">Astuces</a></button>
-    <button><a href="{{ path('default') }}">Home</a></button> #}
+    <button><a href="{{ path('default') }}">Home</a></button>
 
 </div>
 {% endblock %}
