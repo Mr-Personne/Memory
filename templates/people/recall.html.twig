@@ -42,6 +42,7 @@
     </pre>
 
 		<p>What did you memorise?</p>
+		<p id="person-index-text">Person {{userPersonIndex}} :</p>
 
         {{form(form)}}
 		{# <a href="{{ path('recall_another_person') }}">Astuces</a> #}
@@ -71,6 +72,8 @@
 
 	<script>
 		console.log('generatedPeople : ');
+		var personIndex = 1;
+		const personIndexTextEle = document.querySelector("#person-index-text");
 
 		// ajax
 		function ajaxCallAsynch(event) { // console.dir(myForm);
@@ -106,6 +109,9 @@
 		if (data != "") {
 		// location.href = '/people/recall/another';
 		console.log("redirect");
+		// personIndex++
+		personIndexTextEle.innerText = "Person" + data["userPersonIndex"];
+		form.reset();
 
 		}
 
