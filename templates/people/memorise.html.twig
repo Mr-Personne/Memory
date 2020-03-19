@@ -73,6 +73,7 @@
 				<li>{{peopleList[i].address}}</li>
 				<li>{{peopleList[i].town}}, {{peopleList[i].postalCode}}</li>
 				<li>{{peopleList[i].job}}</li>
+				<li>{{peopleList[i].age}} ans</li>
 			</ul>
 			
 				{% set person = [] %}
@@ -83,6 +84,7 @@
 				{% set personTown = peopleList[i].town %}
 				{% set personPostalCode = peopleList[i].postalCode %}
 				{% set personJob = peopleList[i].job %}
+				{% set personAge = peopleList[i].age %}
 				<script>
 					person.push("{{ personFirstName }}");
 					person.push("{{ personLastName }}");
@@ -90,6 +92,7 @@
 					person.push("{{ personTown }}");
 					person.push("{{ personPostalCode }}");
 					person.push("{{ personJob }}");
+					person.push("{{ personAge }}");
 					generatedPeople["{{ personKey }}"] = person;
 					person = [];
 				</script>
@@ -104,7 +107,6 @@
 
 	<script>
 		console.log('generatedPeople : ', generatedPeople);
-
 		var minutes = {{ peopleMinutes }};
 		var secondes = {{ peopleSecondes }};
 		const fullTimeInSecondes = (minutes * 60) + secondes;
@@ -198,6 +200,7 @@
 		}
 
 		// END AJAX
+
 		document.querySelector('#ready-btn').addEventListener('click', () => {
 			ajaxCallAsynch("people", generatedPeople);
 		});
