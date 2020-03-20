@@ -164,20 +164,23 @@ class PeopleController extends AbstractController
         $test2 = $session->get('userAnswer0');
         $currNum = $session->get('userPersonIndex');
         $session->set('loltest', "cou cou test");
-        print_r($answer);
-        echo "<br><br>";
-        print_r($test2);
-        echo "<br><br>";
-        print_r($currNum);
+        
 
         $userAnswArr = array();
         for ($i = 1; $i < $currNum; $i++) {
             $currUserAnswer = $session->get('userAnswer' . $i);
+            unset($currUserAnswer["_token"]);
             $userAnswArr[$i] = $currUserAnswer;
         }
 
+        print_r($answer);
+        echo "<br><br>";
+        echo "VS";
         echo "<br><br>";
         print_r($userAnswArr);
+
+        echo "<br><br>";
+        // print_r($userAnswArr);
 
         $testlol = $session->get('loltest');
         echo "<br><br>";
@@ -209,7 +212,17 @@ class PeopleController extends AbstractController
         // // print_r($userAnswArr);
         // // echo "    " . $len . "  ";
         // // print_r($answArr);
+        echo preg_replace('[,\/ ]', "", "86, rue Pages");
+        echo "<br><br>";
+        // preg_replace($pattern, $replacement, $string);
         for ($i = 1; $i < $len; $i++) {
+            echo "<br><br>".strtolower($answer[$i][0]) ." VS ". strtolower($userAnswArr[$i]["firstName"])
+            ."<br>". strtolower($answer[$i][1]) ." VS ". strtolower($userAnswArr[$i]["lastName"])
+            ."<br>". preg_replace('[,\/ ]', "", $answer[$i][2]) ." VS ". preg_replace('[,\/ ]', "", $userAnswArr[$i]["address"])
+            ."<br>". strtolower($answer[$i][3]) ." VS ". strtolower($userAnswArr[$i]["town"])
+            ."<br>". str_replace(" ", "", $answer[$i][4]) ." VS ". str_replace(" ", "", $userAnswArr[$i]["postalCode"])
+            ."<br>". strtolower($answer[$i][5]) ." VS ". strtolower($userAnswArr[$i]["job"])
+            ."<br>". strtolower($answer[$i][6]) ." VS ". strtolower($userAnswArr[$i]["age"]);
             if (strtolower($answer[$i][0]) == strtolower($userAnswArr[$i]["firstName"])
                 && strtolower($answer[$i][1]) == strtolower($userAnswArr[$i]["lastName"])
                 && strtolower($answer[$i][2]) == strtolower($userAnswArr[$i]["address"])
