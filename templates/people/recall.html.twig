@@ -72,7 +72,7 @@
 
 	<script>
 		console.log('generatedPeople : ');
-		var personIndex = 1;
+		var personIndex = {{userPersonIndex}};
 		const personIndexTextEle = document.querySelector("#person-index-text");
 
 		// ajax
@@ -109,8 +109,8 @@
 		if (data != "") {
 		// location.href = '/people/recall/another';
 		console.log("redirect");
-		// personIndex++
-		personIndexTextEle.innerText = "Person" + data["userPersonIndex"];
+		personIndex++
+		personIndexTextEle.innerText = "Person " + personIndex + " :";
 		form.reset();
 
 		}
