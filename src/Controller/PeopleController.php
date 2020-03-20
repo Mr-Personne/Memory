@@ -214,7 +214,7 @@ class PeopleController extends AbstractController
                 && strtolower($answer[$i][1]) == strtolower($userAnswArr[$i]["lastName"])
                 && strtolower($answer[$i][2]) == strtolower($userAnswArr[$i]["address"])
                 && strtolower($answer[$i][3]) == strtolower($userAnswArr[$i]["town"])
-                && strtolower($answer[$i][4]) == strtolower($userAnswArr[$i]["postalCode"])
+                && str_replace(" ", "", $answer[$i][4]) == str_replace(" ", "", $userAnswArr[$i]["postalCode"])
                 && strtolower($answer[$i][5]) == strtolower($userAnswArr[$i]["job"])
                 && strtolower($answer[$i][6]) == strtolower($userAnswArr[$i]["age"])
             ) {
