@@ -161,9 +161,7 @@ class PeopleController extends AbstractController
     {
         $jsonAnswer = $session->get('generatedPeople');
         $answer = json_decode($jsonAnswer, true);
-        $test2 = $session->get('userAnswer0');
         $currNum = $session->get('userPersonIndex');
-        $session->set('loltest', "cou cou test");
         
 
         $userAnswArr = array();
@@ -173,56 +171,46 @@ class PeopleController extends AbstractController
             $userAnswArr[$i] = $currUserAnswer;
         }
 
-        print_r($answer);
-        echo "<br><br>";
-        echo "VS";
-        echo "<br><br>";
-        print_r($userAnswArr);
-
-        echo "<br><br>";
-        // print_r($userAnswArr);
-
-        $testlol = $session->get('loltest');
-        echo "<br><br>";
-        print_r($testlol);
-        echo "<br><br>";
-        print_r($answer[1]);
-        echo "<br>VS<br>";
-        print_r($userAnswArr[1]);
-        // $userAnswerSession = $session->get('userAnswer');
-        // print_r($userAnswerSession);
-        // $userAnswer = strtolower($userAnswerSession['userAnswer']);
-        // $answer = $session->get('generatedPeople');
-        // $answer = str_replace(",", " ", $answer);
-        // // $userAnswer = str_replace(" ", "", $userAnswer);
-        // $userAnswArr = explode(" ", $userAnswer);
-        // $answArr = explode(" ", $answer);
-        // echo "-----------";
-        // print_r($userAnswArr);
-        // echo ' vs ';
-        // print_r($answArr);
         // print_r($answer);
+        // echo "<br><br>";
+        // echo "VS";
+        // echo "<br><br>";
+        // print_r($userAnswArr);
 
         $score = 0;
         $maxScore = count($answer) - 1;
 
         $len = count($answer);
-        echo "<br><br>";
-        print_r($len);
-        // // print_r($userAnswArr);
-        // // echo "    " . $len . "  ";
-        // // print_r($answArr);
-        echo preg_replace('[,\/ ]', "", "86, rue Pages");
-        echo "<br><br>";
-        // preg_replace($pattern, $replacement, $string);
+        
+        $answersVS = array();
+        $goodAnswerIndex = array();
         for ($i = 1; $i < $len; $i++) {
-            echo "<br><br>".strtolower($answer[$i][0]) ." VS ". strtolower($userAnswArr[$i]["firstName"])
-            ."<br>". strtolower($answer[$i][1]) ." VS ". strtolower($userAnswArr[$i]["lastName"])
-            ."<br>". preg_replace('[,\/ ]', "", $answer[$i][2]) ." VS ". preg_replace('[,\/ ]', "", $userAnswArr[$i]["address"])
-            ."<br>". strtolower($answer[$i][3]) ." VS ". strtolower($userAnswArr[$i]["town"])
-            ."<br>". str_replace(" ", "", $answer[$i][4]) ." VS ". str_replace(" ", "", $userAnswArr[$i]["postalCode"])
-            ."<br>". strtolower($answer[$i][5]) ." VS ". strtolower($userAnswArr[$i]["job"])
-            ."<br>". strtolower($answer[$i][6]) ." VS ". strtolower($userAnswArr[$i]["age"]);
+            $answersVS["person".$i] = [
+                "personIndex" => $i,
+                "firstName" => $answer[$i][0],
+                "userFirstName" => $userAnswArr[$i]["firstName"],
+                "lastName" => $answer[$i][1],
+                "userLastName" => $userAnswArr[$i]["lastName"],
+                "address" => $answer[$i][2],
+                "userAddress" => $userAnswArr[$i]["address"],
+                "town" => $answer[$i][3],
+                "userTown" => $userAnswArr[$i]["town"],
+                "postalCode" => $answer[$i][4],
+                "userPostalCode" => $userAnswArr[$i]["postalCode"],
+                "job" => $answer[$i][5],
+                "userJob" => $userAnswArr[$i]["job"],
+                "age" => $answer[$i][6],
+                "userAge" => $userAnswArr[$i]["age"],
+                "goodAnswer" => "no",
+        
+            ];
+            // echo "<br><br>".strtolower($answer[$i][0]) ." VS ". strtolower($userAnswArr[$i]["firstName"])
+            // ."<br>". strtolower($answer[$i][1]) ." VS ". strtolower($userAnswArr[$i]["lastName"])
+            // ."<br>". preg_replace('[,\/ ]', "", $answer[$i][2]) ." VS ". preg_replace('[,\/ ]', "", $userAnswArr[$i]["address"])
+            // ."<br>". strtolower($answer[$i][3]) ." VS ". strtolower($userAnswArr[$i]["town"])
+            // ."<br>". str_replace(" ", "", $answer[$i][4]) ." VS ". str_replace(" ", "", $userAnswArr[$i]["postalCode"])
+            // ."<br>". strtolower($answer[$i][5]) ." VS ". strtolower($userAnswArr[$i]["job"])
+            // ."<br>". strtolower($answer[$i][6]) ." VS ". strtolower($userAnswArr[$i]["age"]);
             if (strtolower($answer[$i][0]) == strtolower($userAnswArr[$i]["firstName"])
                 && strtolower($answer[$i][1]) == strtolower($userAnswArr[$i]["lastName"])
                 && strtolower($answer[$i][2]) == strtolower($userAnswArr[$i]["address"])
@@ -232,6 +220,7 @@ class PeopleController extends AbstractController
                 && strtolower($answer[$i][6]) == strtolower($userAnswArr[$i]["age"])
             ) {
                 $score++;
+                $answersVS["person".$i]["goodAnswer"] = "yes";
             }
         }
         // $score = $maxScore - count($answer);
@@ -245,8 +234,9 @@ class PeopleController extends AbstractController
             'answer' => $answer,
             'score' => $score,
             'maxScore' => $maxScore,
-            // 'strUserAnswer' => $strUserAnswer,
-            // 'strAnswer' => $strAnswer,
+            'userAnswer' => $userAnswArr,
+            'answer' => $answer,
+            'answersVS' => $answersVS,
         ]);
     }
 }

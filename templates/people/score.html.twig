@@ -22,10 +22,23 @@
 
     <p>Score :</p>
     <p>{{score}}/{{maxScore}}</p>
-    <p>The Answer :</p>
-    {# <p>{{strAnswer}}</p> #}
-    <p>Your Answer :</p>
-    {# <p>{{strUserAnswer}}</p> #}
+    <p>The Answer VS Your Answer:</p>
+    {% for item in answersVS %}
+        {% if item["goodAnswer"] == "yes" %}
+            <div style="color : green">
+        {% elseif item["goodAnswer"] == "no" %}
+            <div style="color : red">
+        {% endif %}
+                <h3>Person {{item["personIndex"]}} :</h3>
+                <p>{{item["firstName"]}} VS {{item["userFirstName"]}}</p>
+                <p>{{item["lastName"]}} VS {{item["userLastName"]}}</p>
+                <p>{{item["address"]}} VS {{item["userAddress"]}}</p>
+                <p>{{item["town"]}} VS {{item["userTown"]}}</p>
+                <p>{{item["postalCode"]}} VS {{item["userPostalCode"]}}</p>
+                <p>{{item["job"]}} VS {{item["userJob"]}}</p>
+                <p>{{item["age"]}} VS {{item["userAge"]}}</p>
+        </div>
+    {% endfor %}
     <button><a href="{{ path('people_memorise') }}">Redo</a></button>
     <button><a href="{{ path('people_setup') }}">Re-setup</a></button>
     <button><a href="{{ path('default') }}">Astuces</a></button>
