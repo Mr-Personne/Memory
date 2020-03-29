@@ -1,24 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DefaultController!{% endblock %}
+{# {% block title %}Hello DefaultController!{% endblock %} #}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1><a href="{{ path('default') }}">Memory</a></h1>
-    <h2>Hello {{ controller_name }}! ✅</h2>
+{# <div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-4 offset-4 text-center">
+                <p>Choisisez sur quoi vous voulez testez votre mémoire :</p>
+                <ul id="main-menu" class="list-unstyled d-flex justify-content-center">
+                    <li><a href="{{ path('numbers_setup') }}">Numbers</a></li>
+                    <li><a href="{{ path('words_setup') }}">Words</a></li>
+                    <li><a href="{{ path('people_setup') }}">People</a></li>
+                    <li><a href="#">Cards</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div> #}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/html/src/Controller/DefaultController.php'|file_link(0) }}">src/Controller/DefaultController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/html/templates/default/index.html.twig'|file_link(0) }}">templates/default/index.html.twig</a></code></li>
-        <li><a href="{{ path('numbers_setup') }}">Numbers</a></li>
-        <li><a href="{{ path('words_setup') }}">Words</a></li>
-        <li><a href="{{ path('people_setup') }}">People</a></li>
-    </ul>
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <p>Choisisez sur quoi vous voulez testez votre mémoire :</p>
+            </div>
+        </div>
+        <div id="main-menu" class="row">
+            <div class="col-6 offset-3 text-center d-flex justify-content-center mb-2">
+                <div class="main-button text-center bg-color-1 mr-2">
+                    <p><a href="{{ path('numbers_setup') }}"><img src="/images/123-numbers.png" alt="icone chiffres"></a></p>
+                    <p><a href="{{ path('numbers_setup') }}">Numbers</a></p>
+                </div>
+
+                <div class="main-button text-center bg-color-2">
+                    <p><a href="{{ path('words_setup') }}"><img src="/images/words-icon.png" alt="icone ABC"></a></p>
+                    <p><a href="{{ path('words_setup') }}">Words</a></p>
+                </div>
+            </div>
+            <div class="col-6 offset-3 text-center d-flex justify-content-center">
+                <div class="main-button text-center bg-color-3 mr-2">
+                    <p><a href="{{ path('people_setup') }}"><img src="/images/people.png" alt="icone personnes"></a></p>
+                    <p><a href="{{ path('people_setup') }}">People</a></p>
+                </div>
+
+                <div class="main-button text-center bg-color-4">
+                    {# <p><a href="#"><img src="/images/memory-logo-title.png" alt="header : memory" class="w-50"></a></p> #}
+                    <p><a href="#">Cards</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
