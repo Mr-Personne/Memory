@@ -6,10 +6,22 @@
 			{% block title %}Welcome!
 			{% endblock %}
 		</title>
-		{% block stylesheets %}{% endblock %}
+		{% block stylesheets %}<link rel="stylesheet" href="/css/style.css">{% endblock %}
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	</head>
 	<body>
+		<div class="container-fluid">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 text-center">
+						<h1><a href="{{ path('default') }}">
+						<img src="/images/memory-logo-title.png" alt="header : memory" class="w-50">
+						</a></h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 		{% block body %}{% endblock %}
 		{% block javascripts %}{% endblock %}
 
