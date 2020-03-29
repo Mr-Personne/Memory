@@ -1,0 +1,37 @@
+body{
+    background-image: url("../images/dude.png");
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: bottom;
+}
+
+#main-menu a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.main-button{
+    width: 250px;
+    height: 150px;
+}
+
+.main-button img{
+    width: 50px;
+}
+
+.bg-color-1{
+    background-color: #4103DB;
+}
+
+.bg-color-2{
+    background-color: #4E02C5;
+}
+
+.bg-color-3{
+    background-color: #5402BB;
+}
+
+.bg-color-4{
+    background-color: #5C02AC;
+}
