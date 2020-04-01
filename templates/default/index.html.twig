@@ -29,29 +29,35 @@
         </div>
         <div id="main-menu" class="row">
             <div class="col-12 col-lg-6 offset-lg-3 text-center d-flex justify-content-center mb-2">
-                <div>
-                    <div class="main-button text-center bg-color-2 mr-4">
-                        <p><a href="{{ path('numbers_setup') }}"><img src="/images/123-numbers.svg" alt="icone chiffres"></a></p>
+                <div class="mr-4">
+                    <a href="{{ path('numbers_setup') }}">
+                    <div class="main-button text-center bg-color-2">
+                        <p><img src="/images/123-numbers.svg" alt="icone chiffres"></p>
                     </div>
+                    </a>
                     <p><a href="{{ path('numbers_setup') }}">Numbers</a></p>
                 </div>
 
                 <div>
+                    <a href="{{ path('words_setup') }}">
                     <div class="main-button text-center bg-color-2">
-                        <p><a href="{{ path('words_setup') }}"><img src="/images/words-icon.png" alt="icone ABC"></a></p>
+                        <p><img src="/images/words-icon.png" alt="icone ABC"></p>
                     </div>
+                    </a>
                     <p><a href="{{ path('words_setup') }}">Words</a></p>
                 </div>
             </div>
             <div class="col-12 col-lg-6 offset-lg-3 text-center d-flex justify-content-center">
-                <div>
-                    <div class="main-button text-center bg-color-3 mr-4">
-                        <p><a href="{{ path('people_setup') }}"><img src="/images/people.png" alt="icone personnes"></a></p>
+                <div class="mr-4">
+                    <a href="{{ path('people_setup') }}">
+                    <div class="main-button text-center bg-color-3">
+                        <p><img src="/images/people.png" alt="icone personnes"></p>
                     </div>
+                    </a>
                     <p><a href="{{ path('people_setup') }}">People</a></p>
                 </div>
 
-                <div>
+                <div class="mr-4">
                     <div class="main-button text-center bg-color-4">
                         {# <p><a href="#"><img src="/images/memory-logo-title.png" alt="header : memory" class="w-50"></a></p> #}
                     </div>
