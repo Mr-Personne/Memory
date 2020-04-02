@@ -18,7 +18,7 @@ class RecallWordType extends AbstractType
                     'class' => 'user-answer',
                 ],
             ])
-            ->add('Answer!', SubmitType::class);
+            ->add('answer', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
