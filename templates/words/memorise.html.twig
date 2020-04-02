@@ -4,182 +4,149 @@
 {% endblock %}
 
 {% block body %}
-	<style>
-		.example-wrapper {
-			margin: 1em auto;
-			max-width: 800px;
-			width: 95%;
-			font: 18px / 1.5 sans-serif;
-		}
-		.example-wrapper code {
-			background: #F5F5F5;
-			padding: 2px 6px;
-		}
-	</style>
+	<div class="container-fluid">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-lg-6 offset-lg-3 text-center">
 
-	<div class="example-wrapper">
-		<h1>
-			<a href="{{ path('default') }}">Memory</a>
-		</h1>
-		<h2>Hello
-			{{ controller_name }}! ✅</h2>
-
-		{# {% for item in session %}
-						        <p>{{ item }}</p>
-						    {% endfor %} #}
-
-		{# <p>numQuantity : {{ numQuantity }}</p>
-						    <p>numMinutes : {{ numMinutes }}</p>
-						    <p>numSecondes : {{ numSecondes }}</p> #}
-
-		This friendly message is coming from:
-		<ul>
-			<li>Your controller at
-				<code>
-					<a href="{{ '/var/www/html/src/Controller/WordsController.php'|file_link(0) }}">src/Controller/wordsController.php</a>
-				</code>
-			</li>
-			<li>Your template at
-				<code>
-					<a href="{{ '/var/www/html/templates/words/index.html.twig'|file_link(0) }}">templates/words/index.html.twig</a>
-				</code>
-			</li>
-		</ul>
-
-		<p>Time :</p>
-		<p>
-			<span class="minutes-display">{{ wordMinutes }}</span>
-			:
-			<span class="secondes-display">{{ wordSecondes }}</span>
-		</p>
-		<div class="progress">
-			<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
-		</div>
-		<p>Memorise this :</p>
-		{# <p class="generated-nums">{{wordsDisplay}}</p> #}
-		<div>
-			<script>
-				var generatedWords = [];
-			</script>
-			{% set word = '' %}
-			{% for i in range(1, wordQuantity) %}
-				<span>
-					{{wordsList[i].content}}
-				</span>
-				{% set word = wordsList[i].content %}
-				<script>
-					generatedWords.push("{{ word }}");
+					<p class="font-weight-bold">Time :</p>
+					<div>
+						<p class="time-display">
+							<span class="minutes-display">{{ wordMinutes }}</span>
+							:
+							<span class="secondes-display">{{ wordSecondes }}</span>
+						</p>
+					</div>
+					<div class="progress">
+						<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+					</div>
+					<p class="font-weight-bold mt-5">Memorise this :</p>
+					{# <p class="generated-nums">{{wordsDisplay}}</p> #}
+					<div class="generated-words">
+						<script>
+							var generatedWords = [];
+						</script>
+						{% set word = '' %}
+						{% for i in range(1, wordQuantity) %}
+							<span>
+								{{wordsList[i].content}}
+							</span>
+							{% set word = wordsList[i].content %}
+							<script>
+								generatedWords.push("{{ word }}");
 // console.log(generatedWords);
-				</script>
-			{% endfor %}
-		</div>
-		<button id="ready-btn">
-			Ready!
-		</button>
+							</script>
+						{% endfor %}
+					</div>
+					<button id="ready-btn">
+						Ready!
+					</button>
 
+				</div>
+			</div>
+		</div>
 	</div>
 
 
 	<script>
 
-
 		var minutes = {{ wordMinutes }};
-var secondes = {{ wordSecondes }};
-const fullTimeInSecondes = (minutes * 60) + secondes;
-var timeout;
+		var secondes = {{ wordSecondes }};
+		const fullTimeInSecondes = (minutes * 60) + secondes;
+		var timeout;
 
-function timer() {
+		function timer() {
 
-if (secondes === 0) {
-minutes = minutes - 1;
-secondes = 60;
-}
-secondes = secondes - 1;
+		if (secondes === 0) {
+		minutes = minutes - 1;
+		secondes = 60;
+		}
+		secondes = secondes - 1;
 
-// stringy minutes for extra zero in front
-if (minutes < 10) {
-var stringyMins = "0" + minutes;
-} else {
-var stringyMins = minutes;
-}
+		// stringy minutes for extra zero in front
+		if (minutes < 10) {
+		var stringyMins = "0" + minutes;
+		} else {
+		var stringyMins = minutes;
+		}
 
-// stringy secondes for extra zero in front
-if (secondes < 10) {
-var stringySecs = "0" + secondes;
-} else {
-var stringySecs = secondes;
-}
-
-
-var minDisplay = document.querySelector(".minutes-display");
-minDisplay.innerText = stringyMins;
-
-var secDisplay = document.querySelector(".secondes-display");
-secDisplay.innerText = stringySecs;
-
-var currentFullTimeInSecondes = (minutes * 60) + secondes;
-var progressPercent = (currentFullTimeInSecondes * 100) / fullTimeInSecondes;
-// console.log(progressPercent);
-var progressBar = document.querySelector(".progress-bar");
-progressBar.style.width = progressPercent + "%";
+		// stringy secondes for extra zero in front
+		if (secondes < 10) {
+		var stringySecs = "0" + secondes;
+		} else {
+		var stringySecs = secondes;
+		}
 
 
-timeout = setTimeout(timer, 1000);
-if (minutes === 0 && secondes === 0) { // alert("Time over!");
-clearTimeout(timeout);
-ajaxCallAsynch("words", generatedWords);
-}
-}
+		var minDisplay = document.querySelector(".minutes-display");
+		minDisplay.innerText = stringyMins;
+
+		var secDisplay = document.querySelector(".secondes-display");
+		secDisplay.innerText = stringySecs;
+
+		var currentFullTimeInSecondes = (minutes * 60) + secondes;
+		var progressPercent = (currentFullTimeInSecondes * 100) / fullTimeInSecondes;
+		// console.log(progressPercent);
+		var progressBar = document.querySelector(".progress-bar");
+		progressBar.style.width = progressPercent + "%";
 
 
-// ajax
-function ajaxCallAsynch(section, generatedWords) { // console.dir(myForm);
-console.log('section : ', section);
-console.log('generatedWords : ', generatedWords);
-
-console.log(section);
-
-if (section === undefined) {
-console.log("end ajax default ", section);
-return;
-} else {
-console.log("coucou ajax");
-}
-
-var formData = new FormData();
-formData.append("data", generatedWords);
-var jsonString = JSON.stringify(generatedWords);
-var myInit = {
-method: 'POST',
-body: formData
-};
+		timeout = setTimeout(timer, 1000);
+		if (minutes === 0 && secondes === 0) { // alert("Time over!");
+		clearTimeout(timeout);
+		ajaxCallAsynch("words", generatedWords);
+		}
+		}
 
 
-fetch (`/${section}/memorise/end`, myInit).then(function (response) {
+		// ajax
+		function ajaxCallAsynch(section, generatedWords) { // console.dir(myForm);
+		console.log('section : ', section);
+		console.log('generatedWords : ', generatedWords);
 
-console.dir(response);
-return response.text();
+		console.log(section);
 
-}).then(function (data) {
-console.log("data : ", data);
-if (data != "") {
-location.href = '/words/recall';
-console.log("redirect");
-console.log('generatedWords : ', generatedWords);
+		if (section === undefined) {
+		console.log("end ajax default ", section);
+		return;
+		} else {
+		console.log("coucou ajax");
+		}
 
-}
+		var formData = new FormData();
+		formData.append("data", generatedWords);
+		var jsonString = JSON.stringify(generatedWords);
+		var myInit = {
+		method: 'POST',
+		body: formData
+		};
 
 
-});
+		fetch (`/${section}/memorise/end`, myInit).then(function (response) {
+
+		console.dir(response);
+		return response.text();
+
+		}).then(function (data) {
+		console.log("data : ", data);
+		if (data != "") {
+		location.href = '/words/recall';
+		console.log("redirect");
+		console.log('generatedWords : ', generatedWords);
+
+		}
 
 
-}
+		});
 
-// END AJAX
-document.querySelector('#ready-btn').addEventListener('click', () => {
-	ajaxCallAsynch("words", generatedWords);
-});
 
-timer();
+		}
+
+		// END AJAX
+		document.querySelector('#ready-btn').addEventListener('click', () => {
+		ajaxCallAsynch("words", generatedWords);
+		});
+
+		timer();
 	</script>
 {% endblock %}
