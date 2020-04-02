@@ -5,23 +5,21 @@
 <div class="container-fluid">
     <div class="container">
         <div class="row">
-            <div class="col-12 col-lg-6 offset-lg-3">
-                {# {% for item in session %}
-                    <p>{{ item }}</p>
-                {% endfor %} #}
+            <div class="col-12 col-lg-6 offset-lg-3 text-center">
 
-                {# <p>numQuantity : {{ numQuantity }}</p>
-                <p>numMinutes : {{ numMinutes }}</p>
-                <p>numSecondes : {{ numSecondes }}</p> #}
+                <p class="font-weight-bold">Time :</p>
 
-                <p>Time :</p>
-                <p><span class="minutes-display">{{ numMinutes }}</span> : <span class="secondes-display">{{ numSecondes }}</span></p>
+                <div>
+                    {# <p class="m-0 p-0"><img src="/images/time.png" class="img-chrono" alt="icone chrono"></p> #}
+                    <p class="time-display"><span class="minutes-display">{{ numMinutes }}</span> : <span class="secondes-display">{{ numSecondes }}</span></p>
+                </div>
+                
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
                 </div>
-                <p>Memorise this :</p>
+                <p class="font-weight-bold mt-5">Memorise this :</p>
                 <p class="generated-nums">85 74 25 11 44 ...</p>
-                <button><a href="{{ path('numbers_recall') }}">Ready!</a></button>
+                <button class="ready-memorise-button"><a href="{{ path('numbers_recall') }}">Ready!</a></button>
             </div>
         </div>
     </div>
