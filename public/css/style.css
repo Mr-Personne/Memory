@@ -161,7 +161,7 @@
 }
 
 /* SECTION RECALL */
-#recall_number_userAnswer{
+#recall_number_userAnswer, #recall_word_userAnswer{
     border-radius: 10px;
     height: 60px;
     width: 100%;
@@ -169,7 +169,7 @@
     font-size: 30px;
 }
 
-#recall_number_answer{
+#recall_number_answer, #recall_word_answer{
     width: 100%;
     height: 60px;
     background-color: #4203D8;
@@ -182,7 +182,7 @@
     margin-top: 20px;
 }
 
-#recall_number_answer:hover{
+#recall_number_answer:hover, #recall_word_answer:hover{
     cursor: pointer;
 }
 
