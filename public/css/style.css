@@ -179,3 +179,49 @@
 #recall_number_answer:hover{
     cursor: pointer;
 }
+
+/* SECTION SCORING */
+.score-text, .answer-text, .user-answer-text{
+    font-weight: bold;
+    font-size: 20px;
+    color: #4403D4;
+}
+
+.button-redo,
+.button-resetup,
+.button-astuces,
+.button-home{
+    width: 100%;
+    height: 60px;
+    background-color: #4203D8;
+    background: linear-gradient(#4203D8, #5B02AC);
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    border: none;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+.button-redo a,
+.button-resetup a,
+.button-astuces a,
+.button-home a{
+    color: white;
+    text-decoration: none;
+}
+
+.button-redo:hover,
+.button-resetup:hover,
+.button-astuces:hover,
+.button-home:hover{
+    cursor: pointer;
+}
+
+.button-redo a:hover,
+.button-resetup a:hover,
+.button-astuces a:hover,
+.button-home a:hover{
+    color: white;
+    text-decoration: none;
+}

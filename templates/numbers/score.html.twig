@@ -5,17 +5,17 @@
 <div class="container-fluid">
     <div class="container">
         <div class="row">
-            <div class="col-12 col-lg-6 offset-lg-3">
-                <p>Score :</p>
-                <p>{{score}}/{{maxScore}}</p>
-                <p>The Answer :</p>
-                <p>{{strAnswer}}</p>
-                <p>Your Answer :</p>
-                <p>{{strUserAnswer}}</p>
-                <button><a href="{{ path('numbers_memorise') }}">Redo</a></button>
-                <button><a href="{{ path('numbers_setup') }}">Re-setup</a></button>
-                <button><a href="{{ path('default') }}">Astuces</a></button>
-                <button><a href="{{ path('default') }}">Home</a></button>
+            <div class="col-12 col-lg-6 offset-lg-3 text-center">
+                <p class="font-weight-bold">Score :</p>
+                <p class="score-text">{{score}}/{{maxScore}}</p>
+                <p class="font-weight-bold">The Answer :</p>
+                <p class="answer-text">{{strAnswer}}</p>
+                <p class="font-weight-bold">Your Answer :</p>
+                <p class="user-answer-text">{{strUserAnswer}}</p>
+                <a href="{{ path('numbers_memorise') }}"><button class="button-redo">Redo</button></a>
+                <a href="{{ path('numbers_setup') }}"><button class="button-resetup">Re-setup</button></a>
+                <a href="{{ path('default') }}"><button class="button-astuces">Astuces</button></a>
+                <a href="{{ path('default') }}"><button class="button-home">Home</button></a>
             </div>
         </div>
     </div>
