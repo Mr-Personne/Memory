@@ -46,3 +46,50 @@
 .bg-color-4{
     background-color: #5C02AC;
 }
+
+/* SECTION SETUP */
+#setup_number_quantity{
+    border-radius: 10px;
+    height: 60px;
+    text-align: center;
+    font-size: 30px;
+    /* margin-bottom: 20px; */
+}
+
+.img-chrono{
+    width: 50px;
+    margin-right: 20px;
+}
+
+#setup_number_minutes{
+    border-radius: 10px;
+    height: 60px;
+    width: 120px;
+    text-align: center;
+    font-size: 30px;
+}
+
+#setup_number_secondes{
+    border-radius: 10px;
+    height: 60px;
+    width: 120px;
+    text-align: center;
+    font-size: 30px;
+}
+
+#setup_number_go{
+    width: 300px;
+    height: 60px;
+    background-color: #4203D8;
+    background: linear-gradient(#4203D8, #5B02AC);
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    border: none;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+#setup_number_go:hover{
+    cursor: pointer;
+}
