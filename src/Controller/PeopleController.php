@@ -185,25 +185,97 @@ class PeopleController extends AbstractController
         $answersVS = array();
         $goodAnswerIndex = array();
         for ($i = 1; $i < $len; $i++) {
-            $answersVS["person".$i] = [
-                "personIndex" => $i,
-                "firstName" => $answer[$i][0],
-                "userFirstName" => $userAnswArr[$i]["firstName"],
-                "lastName" => $answer[$i][1],
-                "userLastName" => $userAnswArr[$i]["lastName"],
-                "address" => $answer[$i][2],
-                "userAddress" => $userAnswArr[$i]["address"],
-                "town" => $answer[$i][3],
-                "userTown" => $userAnswArr[$i]["town"],
-                "postalCode" => $answer[$i][4],
-                "userPostalCode" => $userAnswArr[$i]["postalCode"],
-                "job" => $answer[$i][5],
-                "userJob" => $userAnswArr[$i]["job"],
-                "age" => $answer[$i][6],
-                "userAge" => $userAnswArr[$i]["age"],
-                "goodAnswer" => "no",
+            // print_r($userAnswArr[$i]["firstName"]);
+            if (isset($userAnswArr[$i]["firstName"])) {
+                $answersVS["person".$i]["firstName"] = $answer[$i][0];
+                $answersVS["person".$i]["userFirstName"] = $userAnswArr[$i]["firstName"];
+            }
+            else {
+                $answersVS["person".$i]["firstName"] = "";
+                $answersVS["person".$i]["userFirstName"] = "";
+            }
+
+            if (isset($userAnswArr[$i]["lastName"])) {
+                $answersVS["person".$i]["lastName"] = $answer[$i][1];
+                $answersVS["person".$i]["userLastName"] = $userAnswArr[$i]["lastName"];
+            }
+            else {
+                $answersVS["person".$i]["lastName"] = "";
+                $answersVS["person".$i]["userLastName"] = "";
+            }
+
+            if (isset($userAnswArr[$i]["address"])) {
+                $answersVS["person".$i]["address"] = $answer[$i][2];
+                $answersVS["person".$i]["userAddress"] = $userAnswArr[$i]["address"];
+            }
+            else {
+                $answersVS["person".$i]["address"] = "";
+                $answersVS["person".$i]["userAddress"] = "";
+            }
+
+            if (isset($userAnswArr[$i]["town"])) {
+                $answersVS["person".$i]["town"] = $answer[$i][3];
+                $answersVS["person".$i]["userTown"] = $userAnswArr[$i]["town"];
+            }
+            else {
+                $answersVS["person".$i]["town"] = "";
+                $answersVS["person".$i]["userTown"] = "";
+            }
+
+            if (isset($userAnswArr[$i]["postalCode"])) {
+                $answersVS["person".$i]["postalCode"] = $answer[$i][4];
+                $answersVS["person".$i]["userPostalCode"] = $userAnswArr[$i]["postalCode"];
+            }
+            else {
+                $answersVS["person".$i]["postalCode"] = "";
+                $answersVS["person".$i]["userPostalCode"] = "";
+            }
+
+            if (isset($userAnswArr[$i]["job"])) {
+                $answersVS["person".$i]["job"] = $answer[$i][5];
+                $answersVS["person".$i]["userJob"] = $userAnswArr[$i]["job"];
+            }
+            else {
+                $answersVS["person".$i]["job"] = "";
+                $answersVS["person".$i]["userJob"] = "";
+            }
+
+            if (isset($userAnswArr[$i]["age"])) {
+                $answersVS["person".$i]["age"] = $answer[$i][6];
+                $answersVS["person".$i]["userAge"] = $userAnswArr[$i]["age"];
+            }
+            else {
+                $answersVS["person".$i]["age"] = "";
+                $answersVS["person".$i]["userAge"] = "";
+            }
+
+            if (isset($answersVS["person".$i])) {
+                $answersVS["person".$i]["personIndex"] = $i;
+                $answersVS["person".$i]["goodAnswer"] = "no";
+                // $answersVS["person".$i] = [
+                //     "personIndex" => $i,
+                //     "goodAnswer" => "no"
+                // ];
+            }
+            // $answersVS["person".$i] = [
+            //     "personIndex" => $i,
+            //     "firstName" => $answer[$i][0],
+            //     "userFirstName" => $userAnswArr[$i]["firstName"],
+            //     "lastName" => $answer[$i][1],
+            //     "userLastName" => $userAnswArr[$i]["lastName"],
+            //     "address" => $answer[$i][2],
+            //     "userAddress" => $userAnswArr[$i]["address"],
+            //     "town" => $answer[$i][3],
+            //     "userTown" => $userAnswArr[$i]["town"],
+            //     "postalCode" => $answer[$i][4],
+            //     "userPostalCode" => $userAnswArr[$i]["postalCode"],
+            //     "job" => $answer[$i][5],
+            //     "userJob" => $userAnswArr[$i]["job"],
+            //     "age" => $answer[$i][6],
+            //     "userAge" => $userAnswArr[$i]["age"],
+            //     "goodAnswer" => "no",
         
-            ];
+            // ];
             // echo "<br><br>".strtolower($answer[$i][0]) ." VS ". strtolower($userAnswArr[$i]["firstName"])
             // ."<br>". strtolower($answer[$i][1]) ." VS ". strtolower($userAnswArr[$i]["lastName"])
             // ."<br>". preg_replace('[,\/ ]', "", $answer[$i][2]) ." VS ". preg_replace('[,\/ ]', "", $userAnswArr[$i]["address"])
@@ -211,13 +283,15 @@ class PeopleController extends AbstractController
             // ."<br>". str_replace(" ", "", $answer[$i][4]) ." VS ". str_replace(" ", "", $userAnswArr[$i]["postalCode"])
             // ."<br>". strtolower($answer[$i][5]) ." VS ". strtolower($userAnswArr[$i]["job"])
             // ."<br>". strtolower($answer[$i][6]) ." VS ". strtolower($userAnswArr[$i]["age"]);
-            if (strtolower($answer[$i][0]) == strtolower($userAnswArr[$i]["firstName"])
-                && strtolower($answer[$i][1]) == strtolower($userAnswArr[$i]["lastName"])
-                && strtolower($answer[$i][2]) == strtolower($userAnswArr[$i]["address"])
-                && strtolower($answer[$i][3]) == strtolower($userAnswArr[$i]["town"])
-                && str_replace(" ", "", $answer[$i][4]) == str_replace(" ", "", $userAnswArr[$i]["postalCode"])
-                && strtolower($answer[$i][5]) == strtolower($userAnswArr[$i]["job"])
-                && strtolower($answer[$i][6]) == strtolower($userAnswArr[$i]["age"])
+
+            print_r($answersVS);
+            if (strtolower($answersVS["person".$i]["firstName"]) == strtolower($answersVS["person".$i]["userFirstName"])
+                && strtolower($answersVS["person".$i]["lastName"]) == strtolower($answersVS["person".$i]["userLastName"])
+                && strtolower($answersVS["person".$i]["address"]) == strtolower($answersVS["person".$i]["userAddress"])
+                && strtolower($answersVS["person".$i]["town"]) == strtolower($answersVS["person".$i]["userTown"])
+                && str_replace(" ", "", $answersVS["person".$i]["postalCode"]) == str_replace(" ", "", $answersVS["person".$i]["userPostalCode"])
+                && strtolower($answersVS["person".$i]["job"]) == strtolower($answersVS["person".$i]["userJob"])
+                && strtolower($answersVS["person".$i]["age"]) == strtolower($answersVS["person".$i]["userAge"])
             ) {
                 $score++;
                 $answersVS["person".$i]["goodAnswer"] = "yes";
