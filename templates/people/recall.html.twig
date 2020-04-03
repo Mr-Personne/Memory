@@ -4,71 +4,66 @@
 {% endblock %}
 
 {% block body %}
-	<style>
-		.example-wrapper {
-			margin: 1em auto;
-			max-width: 800px;
-			width: 95%;
-			font: 18px / 1.5 sans-serif;
-		}
-		.example-wrapper code {
-			background: #F5F5F5;
-			padding: 2px 6px;
-		}
-	</style>
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-6 offset-lg-3 text-center">
+                <p class="font-weight-bold">What did you memorise?</p>
+				<p id="person-index-text">Person {{userPersonIndex}} :</p>
 
-	<div class="example-wrapper">
-		<h1>
-			<a href="{{ path('default') }}">Memory</a>
-		</h1>
-		<h2>Hello
-			{{ controller_name }}! ✅</h2>
-
-		This friendly message is coming from:
-		<ul>
-			<li>Your controller at
-				<code>
-					<a href="{{ '/var/www/html/src/Controller/PeopleController.php'|file_link(0) }}">src/Controller/PeopleController.php</a>
-				</code>
-			</li>
-			<li>Your template at
-				<code>
-					<a href="{{ '/var/www/html/templates/people/index.html.twig'|file_link(0) }}">templates/people/index.html.twig</a>
-				</code>
-			</li>
-		</ul>
-		<pre>
-        {{ dump(peopleQuantity) }}
-    </pre>
-
-		<p>What did you memorise?</p>
-		<p id="person-index-text">Person {{userPersonIndex}} :</p>
-
-        {{form(form)}}
-		{# <a href="{{ path('recall_another_person') }}">Astuces</a> #}
-		{# <button id="recall-more-button">Recall More</button> #}
-		{% for i in range(1, peopleQuantity) %}
-		{# {{form(form)}} #}
-			{# {{ form_start(form, { attr:{ novalidate:'novalidate'} } ) }}
-									<div>
-										{{ form_errors(form) }}
-									</div>
-									<div>
-										{{ form_errors(form.firstName) }}
-										{{ form_label(form.firstName, "First name??? :") }}
-										{{ form_widget(form.firstName, { attr:{ class:'ghfghgdh hrthgh'} }) }}
-									</div> #}
-
-
-		{% endfor %}
-		{# <div>
-							{{ form_widget(form._token) }}
-							{{ form_widget(form.Answer, { label: 'Ajouter' }) }}
-						</div> #}
-	{# don't render unrendered fields #}
-		{# {{ form_end(form, {'render_rest': false}) }} #}
-
+        		{# {{form(form)}} #}
+                {{ form_start(form, { attr:{ novalidate:'novalidate'} } ) }}
+                <div>
+                    {{ form_errors(form) }}
+                </div>
+				<div class="row">
+					<div class="col-6 d-flex flex-column">
+						{{ form_errors(form.firstName) }}
+						{{ form_label(form.firstName) }}
+						{{ form_widget(form.firstName) }}
+					</div>
+					<div class="col-6 d-flex flex-column">
+						{{ form_errors(form.lastName) }}
+						{{ form_label(form.lastName) }}
+						{{ form_widget(form.lastName) }}
+					</div>
+				</div>
+				<div>
+                    {{ form_errors(form.address) }}
+					{{ form_label(form.address) }}
+                    {{ form_widget(form.address) }}
+                </div>
+				<div>
+                    {{ form_errors(form.town) }}
+					{{ form_label(form.town) }}
+                    {{ form_widget(form.town) }}
+                </div>
+				<div>
+                    {{ form_errors(form.postalCode) }}
+					{{ form_label(form.postalCode) }}
+                    {{ form_widget(form.postalCode) }}
+                </div>
+				<div>
+                    {{ form_errors(form.age) }}
+					{{ form_label(form.age) }}
+                    {{ form_widget(form.age) }}
+                </div>
+				<div>
+                    {{ form_errors(form.job) }}
+					{{ form_label(form.job) }}
+                    {{ form_widget(form.job) }}
+                </div>
+                <div>
+                    {{ form_widget(form._token) }}
+					{{ form_widget(form.recallMore, { label: 'Recall next person >>' }) }}
+                    {{ form_widget(form.answer, { label: 'Answer!' }) }}
+                </div>
+                {# don't render unrendered fields #}
+                {{ form_end(form, {'render_rest': false}) }}
+			</div>
+		</div>
 	</div>
+</div>
 
 	<script>
 		console.log('generatedPeople : ');
@@ -122,7 +117,7 @@
 		}
 
 		// END AJAX
-		document.querySelector('#recall_people_recall-more').addEventListener('click', (event) => {
+		document.querySelector('#recall_people_recallMore').addEventListener('click', (event) => {
 			event.preventDefault();
 			console.log("clicky");
 			ajaxCallAsynch(event);
