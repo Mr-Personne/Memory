@@ -46,8 +46,8 @@ class RecallPeopleType extends AbstractType
             //         }
             //     }
             // })
-            ->add('Answer!', SubmitType::class)
-            ->add('recall-more', SubmitType::class);
+            ->add('answer', SubmitType::class)
+            ->add('recallMore', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
