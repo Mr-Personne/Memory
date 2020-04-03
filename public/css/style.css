@@ -5,6 +5,11 @@
     background-position-y: bottom;
 } */
 
+/* GENERAL */
+button:focus{
+    outline: none !important;
+}
+
 .main-menu-text{
     font-weight: bold;
     font-size: 20px;
