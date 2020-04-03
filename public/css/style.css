@@ -234,6 +234,9 @@ button:focus{
     font-size: 20px;
     color: #4403D4;
 }
+.user-answer-text h3{
+    text-decoration: underline;
+}
 
 .button-redo,
 .button-resetup,
@@ -272,4 +275,8 @@ button:focus{
 .button-home a:hover{
     color: white;
     text-decoration: none;
+}
+
+.answer-text h3{
+    text-decoration: underline;
 }
