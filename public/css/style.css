@@ -136,6 +136,20 @@ button:focus{
     font-size: 30px;
 }
 
+.generated-person{
+    width: 270px;
+}
+.generated-person p{
+    padding: 0;
+    margin: 0;
+}
+.generated-person p:first-child{
+    font-weight: bold;
+}
+.generated-person .last-name{
+    text-transform: uppercase;
+}
+
 .ready-memorise-button, #ready-btn{
     width: 300px;
     height: 60px;
