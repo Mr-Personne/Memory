@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-6 offset-lg-3 text-center">
+                <p class="font-italic">By default you will have 5 minutes to remember 52 cards</p>
+
+                {# {{ form(form) }} #}
+                {{ form_start(form, { attr:{ novalidate:'novalidate'} } ) }}
+                <div>
+                    {{ form_errors(form) }}
+                </div>
+                <p class="font-weight-bold">{{ form_label(form.quantity, "How many do you want to memorise?") }}</p>
+                <div>
+                    {{ form_errors(form.quantity) }}
+                    {{ form_widget(form.quantity) }}
+                </div>
+                <p class="font-weight-bold mt-4">{{ form_label(form.minutes, "How long do you need to memorise?") }}</p>
+                <div class="d-flex justify-content-center">
+                    <p class="m-0 p-0"><img src="/images/time.png" class="img-chrono" alt="icone chrono"></p>
+                    {{ form_errors(form.minutes) }}
+                    {{ form_widget(form.minutes) }}
+
+                    {{ form_errors(form.minutes) }}
+                    {{ form_widget(form.secondes) }}
+                </div>
+                <div>
+                    {{ form_widget(form._token) }}
+                    {{ form_widget(form.go, { label: 'Go!' }) }}
+                </div>
+                {# don't render unrendered fields #}
+                {{ form_end(form, {'render_rest': false}) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
