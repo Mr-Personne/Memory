@@ -37,9 +37,9 @@ class CardsController extends AbstractController
                 $_POST['setup_card']['minutes'] = 5;
                 $_POST['setup_card']['secondes'] = 0;
             }
-            $session->set('numQuantity', $_POST['setup_card']['quantity']);
-            $session->set('numMinutes', $_POST['setup_card']['minutes']);
-            $session->set('numSecondes', $_POST['setup_card']['secondes']);
+            $session->set('cardQuantity', $_POST['setup_card']['quantity']);
+            $session->set('cardMinutes', $_POST['setup_card']['minutes']);
+            $session->set('cardSecondes', $_POST['setup_card']['secondes']);
             return $this->redirectToRoute('cards_memorise');
         }
 
@@ -47,6 +47,33 @@ class CardsController extends AbstractController
             'controller_name' => 'cards Setup',
             'form' => $form->createView(),
 
+        ]);
+    }
+
+    /**
+     * @Route("/memorise", name="cards_memorise")
+     */
+    public function memorise(SessionInterface $session)
+    {
+
+        // print_r($session->get('attribute-name'));
+        $randCardsLen = $session->get('cardQuantity');
+        $cardSuits = ["A", "D", "C", "H"];
+        $setNumbers = 1;
+        $generatedCards = [];
+        for ($i = 0; $i < $randCardsLen; $i++) {
+            $randCardNum = rand(1, 13);
+            $randCardSuite = rand(0, 13);
+            // $generatedCards .= $randNum;
+            array_push($generatedCards, $randCardNum."-".$cardSuits[$randCardSuite]);
+        }
+        $session->set('generatedCards', $generatedCards);
+        return $this->render('cards/memorise.html.twig', [
+            'controller_name' => 'Cards memorise',
+            'cardQuantity' => $session->get('cardQuantity'),
+            'cardMinutes' => $session->get('cardMinutes'),
+            'cardSecondes' => $session->get('cardSecondes'),
+            'generatedCards' => $generatedCards,
         ]);
     }
 }
