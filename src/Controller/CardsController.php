@@ -62,32 +62,38 @@ class CardsController extends AbstractController
         $numberOfCards = 0;
         $currentPack = [];
         $generatedCards = [];
+        $test = [];
+        //generates all cards by checking if  a card has already been used by checking the currentpack array
+        //once the number of cards generated has been reached (52), it changes the pack to use and generate the
+        //next set of cards (by doing currentpack = [])
         for ($i = 0; $i < $randCardsLen; $i++) {
             if ($numberOfCards >= 52) {
                 $numberOfCards = 0;
                 $currentPack = [];
             }
             $randCardNum = rand(1, 13);
-            $randCardSuite = rand(0, 13);
-            // $generatedCards .= $randNum;
+            $randCardSuite = rand(0, 3);
             $card = $randCardNum."-".$cardSuits[$randCardSuite];
-            if (!in_array($card, $currentPack)) {
+
+            if (in_array($card, $currentPack)) {
+                while (in_array($card, $currentPack)) {
+                    $randCardNum = rand(1, 13);
+                    $randCardSuite = rand(0, 3);
+                    $card = $randCardNum."-".$cardSuits[$randCardSuite];
+                }
+
                 array_push($generatedCards, $card);
+                array_push($currentPack, $card);
                 $numberOfCards++;
             }
             else{
-                while (in_array($card, $currentPack)) {
-                    $randCardNum = rand(1, 13);
-                    $randCardSuite = rand(0, 13);
-                    // $generatedCards .= $randNum;
-                    $card = $randCardNum."-".$cardSuits[$randCardSuite];
-                }
-                
                 array_push($generatedCards, $card);
+                array_push($currentPack, $card);
                 $numberOfCards++;
             }
             
         }
+        
         $session->set('generatedCards', $generatedCards);
         return $this->render('cards/memorise.html.twig', [
             'controller_name' => 'Cards memorise',
