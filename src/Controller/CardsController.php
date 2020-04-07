@@ -59,13 +59,34 @@ class CardsController extends AbstractController
         // print_r($session->get('attribute-name'));
         $randCardsLen = $session->get('cardQuantity');
         $cardSuits = ["A", "D", "C", "H"];
-        $setNumbers = 1;
+        $numberOfCards = 0;
+        $currentPack = [];
         $generatedCards = [];
         for ($i = 0; $i < $randCardsLen; $i++) {
+            if ($numberOfCards >= 52) {
+                $numberOfCards = 0;
+                $currentPack = [];
+            }
             $randCardNum = rand(1, 13);
             $randCardSuite = rand(0, 13);
             // $generatedCards .= $randNum;
-            array_push($generatedCards, $randCardNum."-".$cardSuits[$randCardSuite]);
+            $card = $randCardNum."-".$cardSuits[$randCardSuite];
+            if (!in_array($card, $currentPack)) {
+                array_push($generatedCards, $card);
+                $numberOfCards++;
+            }
+            else{
+                while (in_array($card, $currentPack)) {
+                    $randCardNum = rand(1, 13);
+                    $randCardSuite = rand(0, 13);
+                    // $generatedCards .= $randNum;
+                    $card = $randCardNum."-".$cardSuits[$randCardSuite];
+                }
+                
+                array_push($generatedCards, $card);
+                $numberOfCards++;
+            }
+            
         }
         $session->set('generatedCards', $generatedCards);
         return $this->render('cards/memorise.html.twig', [
