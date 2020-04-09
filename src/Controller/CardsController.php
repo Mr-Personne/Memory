@@ -147,7 +147,7 @@ class CardsController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $session->set('userAnswer', $_POST['recall_cards']);
+            $session->set('userAnswer', $_POST['recall_card']);
             return $this->redirectToRoute('cards_score');
         }
 
@@ -155,6 +155,58 @@ class CardsController extends AbstractController
         return $this->render('cards/recall.html.twig', [
             'controller_name' => 'Cards recall',
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/score", name="cards_score")
+     */
+    public function score(SessionInterface $session)
+    {
+        $userAnswerSession = $session->get('userAnswer');
+        $userAnswer = strtoupper($userAnswerSession['userAnswer']);
+        $answer = $session->get('generatedCards');
+        $answer = str_replace(",", " ", $answer);
+        // $userAnswer = str_replace(" ", "", $userAnswer);
+        $userAnswArr = explode(" ", $userAnswer);
+        // $answArr = explode(" ", $answer);
+        $answArr = $answer;
+        // echo "-----------";
+        // print_r($userAnswArr);
+        // echo ' vs ';
+        // print_r($answArr);
+        // print_r($answer);
+
+        $score = 0;
+        $maxScore = count($answArr);
+        // $userAnswArr = str_split($userAnswer);
+        // $answArr = str_split($answer);
+        $len = count($userAnswArr);
+        // print_r($userAnswArr);
+        // echo "    " . $len . "  ";
+        // print_r($answArr);
+        for ($i = 0; $i < $len; $i++) {
+
+            if ($userAnswArr[$i] == $answArr[$i]) {
+                $score++;
+            }
+        }
+        // $score = $maxScore - count($answArr);
+        //resplits the answers back to two digits with a space between each for user presentation
+        // $strAnswer = implode(" ", $answArr);
+        // $strUserAnswer = implode(" ", $userAnswArr);
+        $strAnswer = implode(" => ",$answArr);
+        $strUserAnswer = implode(" => ",$userAnswArr);
+
+
+        return $this->render('cards/score.html.twig', [
+            'controller_name' => 'Cards score',
+            'userAnswer' => $userAnswer,
+            'answer' => $answer,
+            'score' => $score,
+            'maxScore' => $maxScore,
+            'strUserAnswer' => $strUserAnswer,
+            'strAnswer' => $strAnswer,
         ]);
     }
 }
