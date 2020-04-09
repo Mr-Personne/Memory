@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\SetupCardType;
+use App\Form\RecallCardType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -58,7 +59,7 @@ class CardsController extends AbstractController
 
         // print_r($session->get('attribute-name'));
         $randCardsLen = $session->get('cardQuantity');
-        $cardSuits = ["A", "D", "C", "H"];
+        $cardSuits = ["S", "D", "C", "H"];
         $numberOfCards = 0;
         $currentPack = [];
         $generatedCards = [];
@@ -73,12 +74,36 @@ class CardsController extends AbstractController
             }
             $randCardNum = rand(1, 13);
             $randCardSuite = rand(0, 3);
+            if($randCardNum == 1){
+                $randCardNum = "A";
+            }
+            elseif($randCardNum == 11){
+                $randCardNum = "J";
+            }
+            elseif($randCardNum == 12){
+                $randCardNum = "Q";
+            }
+            elseif($randCardNum == 13){
+                $randCardNum = "K";
+            }
             $card = $randCardNum."-".$cardSuits[$randCardSuite];
 
             if (in_array($card, $currentPack)) {
                 while (in_array($card, $currentPack)) {
                     $randCardNum = rand(1, 13);
                     $randCardSuite = rand(0, 3);
+                    if($randCardNum == 1){
+                        $randCardNum = "A";
+                    }
+                    elseif($randCardNum == 11){
+                        $randCardNum = "J";
+                    }
+                    elseif($randCardNum == 12){
+                        $randCardNum = "Q";
+                    }
+                    elseif($randCardNum == 13){
+                        $randCardNum = "K";
+                    }
                     $card = $randCardNum."-".$cardSuits[$randCardSuite];
                 }
 
@@ -101,6 +126,35 @@ class CardsController extends AbstractController
             'cardMinutes' => $session->get('cardMinutes'),
             'cardSecondes' => $session->get('cardSecondes'),
             'generatedCards' => $generatedCards,
+        ]);
+    }
+
+    /**
+     * @Route("/memorise/end", name="cards_memorise_end")
+     */
+    public function endMemorise(SessionInterface $session)
+    {
+        return $this->redirectToRoute('cards_recall');
+    }
+
+    /**
+     * @Route("/recall", name="cards_recall")
+     */
+    public function recall(Request $request, SessionInterface $session)
+    {
+
+        $form = $this->createForm(RecallCardType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $session->set('userAnswer', $_POST['recall_cards']);
+            return $this->redirectToRoute('cards_score');
+        }
+
+
+        return $this->render('cards/recall.html.twig', [
+            'controller_name' => 'Cards recall',
+            'form' => $form->createView(),
         ]);
     }
 }

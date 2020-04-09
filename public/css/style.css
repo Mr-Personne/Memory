@@ -150,6 +150,15 @@ button:focus{
     text-transform: uppercase;
 }
 
+.card{
+    width: 100px;
+}
+.card-text{
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: 25px;
+}
+
 .ready-memorise-button, #ready-btn{
     width: 300px;
     height: 60px;
@@ -188,6 +197,7 @@ button:focus{
 
 #recall_number_userAnswer, 
 #recall_word_userAnswer,
+#recall_card_userAnswer,
 #recall_people_address,
 #recall_people_town,
 #recall_people_postalCode,
@@ -209,6 +219,7 @@ button:focus{
 
 #recall_number_answer, 
 #recall_word_answer, 
+#recall_card_answer, 
 #recall_people_answer, 
 #recall_people_recallMore{
     width: 100%;
@@ -223,7 +234,7 @@ button:focus{
     margin-top: 20px;
 }
 
-#recall_number_answer:hover, #recall_word_answer:hover, 
+#recall_number_answer:hover, #recall_word_answer:hover, #recall_card_answer:hover,
 #recall_people_answer:hover, #recall_people_recallMore:hover{
     cursor: pointer;
 }

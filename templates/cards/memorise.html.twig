@@ -19,10 +19,18 @@
                 </div>
                 <p class="font-weight-bold mt-5">Memorise this :</p>
                 {# <p class="generated-nums">85 74 25 11 44 ...</p> #}
-                <pre>
+                {# <pre>
                     {{ dump(generatedCards) }}
-                </pre>
-                <a href="#"><button class="ready-memorise-button">Ready!</button></a>
+                </pre> #}
+                <div class="d-flex justify-content-center align-items-center flex-wrap">
+                {% for item in generatedCards %}
+                <div class="d-flex flex-column justify-content-center align-items-center w-25 p-3">
+                    <img src="/images/cards/{{item}}.svg" alt="{{item}}" class="card" width="100">
+                    <p class="card-text">{{item}}</p>
+                </div>
+                {% endfor %}
+                </div>
+                <a href="{{ path('cards_recall') }}"><button class="ready-memorise-button">Ready!</button></a>
                 {# {{ path('cards_recall') }} #}
             </div>
         </div>

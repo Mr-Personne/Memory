@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-6 offset-lg-3 text-center">
+                <p class="font-weight-bold">What did you memorise?</p>
+
+                {# {{form(form)}} #}
+                {{ form_start(form, { attr:{ novalidate:'novalidate'} } ) }}
+                <div>
+                    {{ form_errors(form) }}
+                </div>
+                <div>
+                    {{ form_errors(form.userAnswer) }}
+                    {{ form_widget(form.userAnswer) }}
+                </div>
+                <div>
+                    {{ form_widget(form._token) }}
+                    {{ form_widget(form.answer, { label: 'Answer!' }) }}
+                </div>
+                {# don't render unrendered fields #}
+                {{ form_end(form, {'render_rest': false}) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
