@@ -39,6 +39,10 @@ class WordsController extends AbstractController
                 $_POST['setup_word']['minutes'] = 5;
                 $_POST['setup_word']['secondes'] = 0;
             }
+
+            if ($_POST['setup_word']['quantity'] <= 0) {
+                $_POST['setup_word']['quantity'] = 10;
+            }
             $session->set('wordQuantity', $_POST['setup_word']['quantity']);
             $session->set('wordMinutes', $_POST['setup_word']['minutes']);
             $session->set('wordSecondes', $_POST['setup_word']['secondes']);
