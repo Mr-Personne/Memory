@@ -160,9 +160,11 @@ class NumbersController extends AbstractController
         $userAnswArr = str_split($userAnswer);
         $answArr = str_split($answer);
         $len = count($userAnswArr);
-        // print_r($userAnswArr);
-        // echo "    " . $len . "  ";
-        // print_r($answArr);
+        //variable to keep track of number of good answers (to be compared to full amount of user answer)
+        //(basically it checks if someone just typed a bunch of random numbers again and again)
+        //(if they do that they'll get -1 for each wrong answer/extra number)
+        $correctAnswers = array();
+        
         for ($i = 0; $i < $len; $i++) {
             // echo ' '.$userAnswArr[$i];
             // echo '    '.array_search('lol', $answArr).' next : <br>';
@@ -177,15 +179,8 @@ class NumbersController extends AbstractController
                 //deletes it from the answer array so that it doesnt take in account next time
                 // array_splice($answArr, $numberIndex, 1);
                 unset($answArr[$numIndex]);
+                array_push($correctAnswers, $userAnswArr[$i]);
 
-
-                // echo "<br><br>";
-                // echo implode("", $userAnswArr);
-                // print_r($userAnswArr);
-                // echo "USER    " . $len . "  ANSWER";
-                // echo implode("", $answArr);
-                // print_r($answArr);
-                // echo "<br>";
             }
             elseif (array_search($userAnswArr[$i], $answArr) == 0 && array_search($userAnswArr[$i], $answArr) !== false) {
                 $numIndex = array_search($userAnswArr[$i], $answArr);
@@ -193,9 +188,17 @@ class NumbersController extends AbstractController
                 //deletes it from the answer array so that it doesnt take in account next time
                 // array_splice($answArr, $numberIndex, 1);
                 unset($answArr[$numIndex]);
+                array_push($correctAnswers, $userAnswArr[$i]);
             }
         }
         $score = $maxScore - count($answArr);
+        // echo count($userAnswArr) .">". count($correctAnswers);
+        // if (count($userAnswArr) > $correctAnswers) {
+        //     echo count($userAnswArr) ."-". count($correctAnswers);
+        //     $wrongAnswersAmount = count($userAnswArr) - count($correctAnswers);
+        //     $score = $score - $wrongAnswersAmount;
+        // }
+        
         //resplits the answers back to two digits with a space between each for user presentation
         $strAnswer = chunk_split($answer, 2, ' ');
         $strUserAnswer = chunk_split($userAnswer, 2, ' ');
