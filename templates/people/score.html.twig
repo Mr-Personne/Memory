@@ -7,7 +7,6 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-lg-6 offset-lg-3 text-center">
-
                 <p class="font-weight-bold">Score :</p>
                 <p class="score-text">{{score}}/{{maxScore}}</p>
                 <p class="font-weight-bold">The Answer VS Your Answer:</p>
@@ -20,7 +19,7 @@
                             <h3>Person {{item["personIndex"]}} :</h3>
                             <p>{{item["firstName"]}} VS {{item["userFirstName"]}}</p>
                             <p>{{item["lastName"]}} VS {{item["userLastName"]}}</p>
-                            <p>{{item["address"]}} VS {{item["userAddress"]}}</p>
+                            <p>{{item["address"]|escape('html')}} VS {{item["userAddress"]}}</p>
                             <p>{{item["town"]}} VS {{item["userTown"]}}</p>
                             <p>{{item["postalCode"]}} VS {{item["userPostalCode"]}}</p>
                             <p>{{item["job"]}} VS {{item["userJob"]}}</p>
