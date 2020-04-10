@@ -29,7 +29,7 @@ class SetupPeopleType extends AbstractType
                  'attr' => [
                      'class' => 'quantity',
                      'min' => 1,
-                     'value' => 10,
+                     'value' => 4,
                     ], 
             ])
             ->add('minutes', IntegerType::class, [
