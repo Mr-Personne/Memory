@@ -38,6 +38,10 @@ class CardsController extends AbstractController
                 $_POST['setup_card']['minutes'] = 5;
                 $_POST['setup_card']['secondes'] = 0;
             }
+
+            if ($_POST['setup_card']['quantity'] <= 0) {
+                $_POST['setup_card']['quantity'] = 52;
+            }
             $session->set('cardQuantity', $_POST['setup_card']['quantity']);
             $session->set('cardMinutes', $_POST['setup_card']['minutes']);
             $session->set('cardSecondes', $_POST['setup_card']['secondes']);
