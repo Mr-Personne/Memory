@@ -107,7 +107,7 @@ class PeopleController extends AbstractController
 
         $jsonAnswer = $session->get('generatedPeople');
         $answer = json_decode($jsonAnswer, true);
-        print_r($answer);
+        // print_r($answer);
         $peopleQuantity = intval($session->get('peopleQuantity'));
 
 
@@ -148,7 +148,7 @@ class PeopleController extends AbstractController
         $session->set('userAnswer' . $currNum, $_POST['recall_people']);
         $currNum++;
         $session->set('userPersonIndex', $currNum);
-        print_r($session);
+        // print_r($session);
 
         // return $this->redirectToRoute('people_memorise');
         return $this->redirectToRoute('people_recall');
@@ -162,7 +162,10 @@ class PeopleController extends AbstractController
         $jsonAnswer = $session->get('generatedPeople');
         $answer = json_decode($jsonAnswer, true);
         $currNum = $session->get('userPersonIndex');
-        
+
+        if (!$jsonAnswer) {
+            return $this->redirectToRoute('default');
+        }
 
         $userAnswArr = array();
         for ($i = 1; $i < $currNum; $i++) {
@@ -257,41 +260,16 @@ class PeopleController extends AbstractController
                 //     "goodAnswer" => "no"
                 // ];
             }
-            // $answersVS["person".$i] = [
-            //     "personIndex" => $i,
-            //     "firstName" => $answer[$i][0],
-            //     "userFirstName" => $userAnswArr[$i]["firstName"],
-            //     "lastName" => $answer[$i][1],
-            //     "userLastName" => $userAnswArr[$i]["lastName"],
-            //     "address" => $answer[$i][2],
-            //     "userAddress" => $userAnswArr[$i]["address"],
-            //     "town" => $answer[$i][3],
-            //     "userTown" => $userAnswArr[$i]["town"],
-            //     "postalCode" => $answer[$i][4],
-            //     "userPostalCode" => $userAnswArr[$i]["postalCode"],
-            //     "job" => $answer[$i][5],
-            //     "userJob" => $userAnswArr[$i]["job"],
-            //     "age" => $answer[$i][6],
-            //     "userAge" => $userAnswArr[$i]["age"],
-            //     "goodAnswer" => "no",
-        
-            // ];
-            // echo "<br><br>".strtolower($answer[$i][0]) ." VS ". strtolower($userAnswArr[$i]["firstName"])
-            // ."<br>". strtolower($answer[$i][1]) ." VS ". strtolower($userAnswArr[$i]["lastName"])
-            // ."<br>". preg_replace('[,\/ ]', "", $answer[$i][2]) ." VS ". preg_replace('[,\/ ]', "", $userAnswArr[$i]["address"])
-            // ."<br>". strtolower($answer[$i][3]) ." VS ". strtolower($userAnswArr[$i]["town"])
-            // ."<br>". str_replace(" ", "", $answer[$i][4]) ." VS ". str_replace(" ", "", $userAnswArr[$i]["postalCode"])
-            // ."<br>". strtolower($answer[$i][5]) ." VS ". strtolower($userAnswArr[$i]["job"])
-            // ."<br>". strtolower($answer[$i][6]) ." VS ". strtolower($userAnswArr[$i]["age"]);
+            
 
-            print_r($answersVS);
-            if (strtolower($answersVS["person".$i]["firstName"]) == strtolower($answersVS["person".$i]["userFirstName"])
-                && strtolower($answersVS["person".$i]["lastName"]) == strtolower($answersVS["person".$i]["userLastName"])
-                && strtolower($answersVS["person".$i]["address"]) == strtolower($answersVS["person".$i]["userAddress"])
-                && strtolower($answersVS["person".$i]["town"]) == strtolower($answersVS["person".$i]["userTown"])
+            // print_r($answersVS);
+            if (str_replace(" ", "", strtolower($answersVS["person".$i]["firstName"])) == str_replace(" ", "", strtolower($answersVS["person".$i]["userFirstName"]))
+                && str_replace(" ", "", strtolower($answersVS["person".$i]["lastName"])) == str_replace(" ", "", strtolower($answersVS["person".$i]["userLastName"]))
+                && str_replace(",", "", str_replace(" ", "", strtolower($answersVS["person".$i]["address"]))) == str_replace(",", "", str_replace(" ", "", strtolower($answersVS["person".$i]["userAddress"])))
+                && str_replace(" ", "", strtolower($answersVS["person".$i]["town"])) == strtolower($answersVS["person".$i]["userTown"])
                 && str_replace(" ", "", $answersVS["person".$i]["postalCode"]) == str_replace(" ", "", $answersVS["person".$i]["userPostalCode"])
-                && strtolower($answersVS["person".$i]["job"]) == strtolower($answersVS["person".$i]["userJob"])
-                && strtolower($answersVS["person".$i]["age"]) == strtolower($answersVS["person".$i]["userAge"])
+                && str_replace(" ", "", strtolower($answersVS["person".$i]["job"])) == str_replace(" ", "", strtolower($answersVS["person".$i]["userJob"]))
+                && str_replace(" ", "", strtolower($answersVS["person".$i]["age"])) == str_replace(" ", "", strtolower($answersVS["person".$i]["userAge"]))
             ) {
                 $score++;
                 $answersVS["person".$i]["goodAnswer"] = "yes";
@@ -301,7 +279,7 @@ class PeopleController extends AbstractController
         // $strAnswer = $answer;
         // $strUserAnswer = $userAnswer;
 
-
+        // print_r($answersVS);
         return $this->render('people/score.html.twig', [
             'controller_name' => 'People score',
             // 'userAnswer' => $userAnswer,
