@@ -41,6 +41,10 @@ class PeopleController extends AbstractController
                 $_POST['setup_people']['minutes'] = 5;
                 $_POST['setup_people']['secondes'] = 0;
             }
+
+            if ($_POST['setup_people']['quantity'] <= 0) {
+                $_POST['setup_people']['quantity'] = 3;
+            }
             $session->set('peopleQuantity', $_POST['setup_people']['quantity']);
             $session->set('peopleMinutes', $_POST['setup_people']['minutes']);
             $session->set('peopleSecondes', $_POST['setup_people']['secondes']);
