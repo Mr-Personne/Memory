@@ -6,6 +6,10 @@
 } */
 
 /* GENERAL */
+.title-size{
+    width: 50%;
+}
+
 button:focus{
     outline: none !important;
 }
@@ -290,4 +294,57 @@ button:focus{
 
 .answer-text h3{
     text-decoration: underline;
+}
+
+/* // Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+    
+}
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+    
+}
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) { 
+    
+}
+
+/* // Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) { 
+    
+}
+
+/* // Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) { 
+    .title-size{
+        width: 100%;
+    }
+
+    .main-menu-text{
+        font-size: 15px;
+        margin-top: -25px;
+    }
+
+    .main-button{
+        width: 115px;
+        height: 85px;
+    }
+
+    .main-button img {
+        width: 45px;
+    }
+
+    #main-menu div.col-12{
+        height: 105px;
+    }
+
+    #main-menu a {
+        font-size: 13px;
+    }
+
+    .bottom-dude{
+        width: 40%;
+    }
 }
