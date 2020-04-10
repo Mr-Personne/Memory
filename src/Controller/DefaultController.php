@@ -22,7 +22,7 @@ class DefaultController extends AbstractController
         // echo $package->getUrl('/images/memory-logo-title.svg');
         $test1 = $package->getUrl('/images/memory-logo-title.svg');
         // result: /memory-logo-title.svg
-        echo $_SERVER['REQUEST_URI'];
+        // echo $_SERVER['REQUEST_URI'];
         // Relative path
         // echo $package->getUrl('/images/memory-logo-title.png');
         $test2 = $package->getUrl('/images/memory-logo-title.png');
