@@ -43,6 +43,10 @@ class NumbersController extends AbstractController
                 $_POST['setup_number']['minutes'] = 5;
                 $_POST['setup_number']['secondes'] = 0;
             }
+
+            if ($_POST['setup_number']['quantity'] <= 0) {
+                $_POST['setup_number']['quantity'] = 10;
+            }
             $session->set('numQuantity', $_POST['setup_number']['quantity']);
             $session->set('numMinutes', $_POST['setup_number']['minutes']);
             $session->set('numSecondes', $_POST['setup_number']['secondes']);
