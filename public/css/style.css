@@ -347,4 +347,21 @@ button:focus{
     .bottom-dude{
         width: 40%;
     }
+
+    /* SECTION SETUP */
+    #setup_number_quantity, #setup_word_quantity, #setup_people_quantity, #setup_card_quantity{
+        width: 100%;
+    }
+
+    #setup_number_minutes, #setup_word_minutes, #setup_people_minutes, #setup_card_minutes{
+        width: 50%;
+    }
+
+    #setup_number_secondes, #setup_word_secondes, #setup_people_secondes, #setup_card_secondes{
+        width: 50%;
+    }
+
+    #setup_number_go, #setup_word_go, #setup_people_go, #setup_card_go{
+        width: 100%;
+    }
 }
