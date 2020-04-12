@@ -364,4 +364,46 @@ button:focus{
     #setup_number_go, #setup_word_go, #setup_people_go, #setup_card_go{
         width: 100%;
     }
+
+    /* SECTION MEMORISE*/
+    .time-display{
+        text-align: center;
+        font-weight: bold;
+        font-size: 30px;
+        color: #4403D4;
+    }
+
+    .time-display::before{
+        top: 35px;
+        left: 35px;
+    }
+
+    .generated-nums, .generated-words{
+        color: #5902AF;
+        font-weight: bold;
+        font-size: 30px;
+    }
+
+    .generated-words{
+        color: #5902AF;
+        font-weight: bold;
+        font-size: 30px;
+    }
+
+    .generated-person{
+        width: 270px;
+    }
+
+    .card{
+        width: 100px;
+    }
+    .card-text{
+        color: rgb(0, 0, 0);
+        font-weight: bold;
+        font-size: 25px;
+    }
+
+    .ready-memorise-button, #ready-btn{
+        width: 100%;
+    }
 }
