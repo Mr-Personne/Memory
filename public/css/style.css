@@ -6,6 +6,10 @@
 } */
 
 /* GENERAL */
+.width-25{
+    width: 25%;
+}
+
 .title-size{
     width: 50%;
 }
@@ -366,6 +370,10 @@ button:focus{
     }
 
     /* SECTION MEMORISE*/
+    .w-xs-50{
+        width: 50% !important;
+    }
+
     .time-display{
         text-align: center;
         font-weight: bold;
@@ -406,4 +414,5 @@ button:focus{
     .ready-memorise-button, #ready-btn{
         width: 100%;
     }
+    
 }
