@@ -10,6 +10,17 @@
     width: 25%;
 }
 
+.border-tlr-radius-20px{
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.border-blr-radius-20px{
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+
 .title-size{
     width: 50%;
 }
