@@ -18,6 +18,7 @@ class SetupWordType extends AbstractType
                  'attr' => [
                      'class' => 'quantity',
                      'min' => 1,
+                     'max' => 2000,
                      'value' => 10,
                     ], 
             ])
