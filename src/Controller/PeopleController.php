@@ -43,7 +43,7 @@ class PeopleController extends AbstractController
             }
 
             if ($_POST['setup_people']['quantity'] <= 0) {
-                $_POST['setup_people']['quantity'] = 3;
+                $_POST['setup_people']['quantity'] = 4;
             }
             $session->set('peopleQuantity', $_POST['setup_people']['quantity']);
             $session->set('peopleMinutes', $_POST['setup_people']['minutes']);
@@ -198,7 +198,7 @@ class PeopleController extends AbstractController
                 $answersVS["person".$i]["userFirstName"] = $userAnswArr[$i]["firstName"];
             }
             else {
-                $answersVS["person".$i]["firstName"] = "";
+                $answersVS["person".$i]["firstName"] = $answer[$i][0];
                 $answersVS["person".$i]["userFirstName"] = "";
             }
 
@@ -207,7 +207,7 @@ class PeopleController extends AbstractController
                 $answersVS["person".$i]["userLastName"] = $userAnswArr[$i]["lastName"];
             }
             else {
-                $answersVS["person".$i]["lastName"] = "";
+                $answersVS["person".$i]["lastName"] = $answer[$i][1];
                 $answersVS["person".$i]["userLastName"] = "";
             }
 
@@ -216,7 +216,7 @@ class PeopleController extends AbstractController
                 $answersVS["person".$i]["userAddress"] = $userAnswArr[$i]["address"];
             }
             else {
-                $answersVS["person".$i]["address"] = "";
+                $answersVS["person".$i]["address"] = $answer[$i][2];
                 $answersVS["person".$i]["userAddress"] = "";
             }
 
@@ -225,7 +225,7 @@ class PeopleController extends AbstractController
                 $answersVS["person".$i]["userTown"] = $userAnswArr[$i]["town"];
             }
             else {
-                $answersVS["person".$i]["town"] = "";
+                $answersVS["person".$i]["town"] = $answer[$i][3];
                 $answersVS["person".$i]["userTown"] = "";
             }
 
@@ -234,7 +234,7 @@ class PeopleController extends AbstractController
                 $answersVS["person".$i]["userPostalCode"] = $userAnswArr[$i]["postalCode"];
             }
             else {
-                $answersVS["person".$i]["postalCode"] = "";
+                $answersVS["person".$i]["postalCode"] = $answer[$i][4];
                 $answersVS["person".$i]["userPostalCode"] = "";
             }
 
@@ -243,7 +243,7 @@ class PeopleController extends AbstractController
                 $answersVS["person".$i]["userJob"] = $userAnswArr[$i]["job"];
             }
             else {
-                $answersVS["person".$i]["job"] = "";
+                $answersVS["person".$i]["job"] = $answer[$i][5];
                 $answersVS["person".$i]["userJob"] = "";
             }
 
@@ -252,7 +252,7 @@ class PeopleController extends AbstractController
                 $answersVS["person".$i]["userAge"] = $userAnswArr[$i]["age"];
             }
             else {
-                $answersVS["person".$i]["age"] = "";
+                $answersVS["person".$i]["age"] = $answer[$i][6];
                 $answersVS["person".$i]["userAge"] = "";
             }
 
@@ -266,7 +266,7 @@ class PeopleController extends AbstractController
             }
             
 
-            // print_r($answersVS);
+            print_r($answersVS);
             if (str_replace(" ", "", strtolower($answersVS["person".$i]["firstName"])) == str_replace(" ", "", strtolower($answersVS["person".$i]["userFirstName"]))
                 && str_replace(" ", "", strtolower($answersVS["person".$i]["lastName"])) == str_replace(" ", "", strtolower($answersVS["person".$i]["userLastName"]))
                 && str_replace(",", "", str_replace(" ", "", strtolower($answersVS["person".$i]["address"]))) == str_replace(",", "", str_replace(" ", "", strtolower($answersVS["person".$i]["userAddress"])))
