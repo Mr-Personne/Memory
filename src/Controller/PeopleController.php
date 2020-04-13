@@ -33,6 +33,7 @@ class PeopleController extends AbstractController
     public function setup(Request $request, SessionInterface $session)
     {
         // $session->clear();
+
         $form = $this->createForm(SetupPeopleType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -42,7 +43,7 @@ class PeopleController extends AbstractController
                 $_POST['setup_people']['secondes'] = 0;
             }
 
-            if ($_POST['setup_people']['quantity'] <= 0) {
+            if ($_POST['setup_people']['quantity'] <= 0 || $_POST['setup_people']['quantity'] > 199) {
                 $_POST['setup_people']['quantity'] = 4;
             }
             $session->set('peopleQuantity', $_POST['setup_people']['quantity']);
@@ -63,6 +64,10 @@ class PeopleController extends AbstractController
      */
     public function memorise(SessionInterface $session, PersonRepository $PersonRepository)
     {
+        
+        //reset user answer index
+        $session->set('userPersonIndex', 1);
+
         $peopleList = $PersonRepository->findAll();
         shuffle($peopleList);
         // print_r($wordsList);
