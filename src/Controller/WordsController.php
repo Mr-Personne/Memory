@@ -40,7 +40,7 @@ class WordsController extends AbstractController
                 $_POST['setup_word']['secondes'] = 0;
             }
 
-            if ($_POST['setup_word']['quantity'] <= 0) {
+            if ($_POST['setup_word']['quantity'] <= 0 || $_POST['setup_word']['quantity'] > 2000) {
                 $_POST['setup_word']['quantity'] = 10;
             }
             $session->set('wordQuantity', $_POST['setup_word']['quantity']);
