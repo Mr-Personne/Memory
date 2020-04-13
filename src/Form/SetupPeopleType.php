@@ -29,6 +29,7 @@ class SetupPeopleType extends AbstractType
                  'attr' => [
                      'class' => 'quantity',
                      'min' => 1,
+                     'max' => 199,
                      'value' => 4,
                     ], 
             ])
