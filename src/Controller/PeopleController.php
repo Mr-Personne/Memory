@@ -266,7 +266,7 @@ class PeopleController extends AbstractController
             }
             
 
-            print_r($answersVS);
+            // print_r($answersVS);
             if (str_replace(" ", "", strtolower($answersVS["person".$i]["firstName"])) == str_replace(" ", "", strtolower($answersVS["person".$i]["userFirstName"]))
                 && str_replace(" ", "", strtolower($answersVS["person".$i]["lastName"])) == str_replace(" ", "", strtolower($answersVS["person".$i]["userLastName"]))
                 && str_replace(",", "", str_replace(" ", "", strtolower($answersVS["person".$i]["address"]))) == str_replace(",", "", str_replace(" ", "", strtolower($answersVS["person".$i]["userAddress"])))
