@@ -64,6 +64,7 @@ button:focus{
 #setup_number_quantity, #setup_word_quantity, #setup_people_quantity, #setup_card_quantity{
     border-radius: 10px;
     height: 60px;
+    width: 300px;
     text-align: center;
     font-size: 30px;
     /* margin-bottom: 20px; */
