@@ -51,6 +51,11 @@ button:focus{
     border-radius: 15px;
 }
 
+.main-button:hover{
+    background-color: #FFC744;
+    transition: all 0.3s;
+}
+
 .main-button img{
     width: 80px;
 }
@@ -71,6 +76,7 @@ button:focus{
     background-color: #5C02AC;
 }
 
+/* bounce animation */
 .bounce-me {
     animation: bounce 2.5s infinite;
     -webkit-animation: bounce 2.5s infinite;
