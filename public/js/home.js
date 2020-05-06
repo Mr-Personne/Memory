@@ -8,14 +8,14 @@ window.addEventListener("load", () => {
             console.log("hover ", e);
             const mainButtonImg = e.target.childNodes[1].childNodes[0];
             // console.log("mainButtonImg ", mainButtonImg);
-            mainButtonImg.classList.add("bounce-me");
+            mainButtonImg.classList.add("shake-me");
         });
 
         element.addEventListener("mouseout", (e) => {
             // console.log("hover ", e);
             const mainButtonImg = e.target.childNodes[1].childNodes[0];
             // console.log("mainButtonImg ", mainButtonImg);
-            mainButtonImg.classList.remove("bounce-me");
+            mainButtonImg.classList.remove("shake-me");
         });
     });
 });
