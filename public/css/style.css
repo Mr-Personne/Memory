@@ -501,13 +501,31 @@ input[type=number]::-webkit-outer-spin-button {
 
 /* // Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) and (max-width: 767.98px) { 
-    
+    .title-text {
+        font-family: Impact, Charcoal, sans-serif;
+        font-size: 8rem;
+    }
+    .brain-logo {
+        width: 120px;
+        margin-left: -20px;
+        margin-right: -20px;
+    }
 }
 
 /* // Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) { 
     .title-size{
         width: 100%;
+    }
+
+    .title-text {
+        font-size: 4rem;
+        margin-bottom: 35px;
+    }
+    .brain-logo {
+        width: 55px;
+        margin-left: -10px;
+        margin-right: -10px;
     }
 
     .main-menu-text{
