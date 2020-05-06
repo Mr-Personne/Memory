@@ -145,6 +145,24 @@ button:focus{
   }
 
 /* SECTION SETUP */
+/* remove default arrows from input fields - firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+    margin: 0;
+}
+/* remove default arrows from input fields - google */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+      margin: 0; 
+}
+
+/* remove google input outline */
+:focus {
+    outline: none;
+}
+
 #setup_number_quantity, #setup_word_quantity, #setup_people_quantity, #setup_card_quantity{
     border-radius: 10px;
     height: 60px;
