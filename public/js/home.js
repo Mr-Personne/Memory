@@ -1,5 +1,5 @@
 window.addEventListener("load", () => {
-    console.log("home script");
+    // console.log("home script");
 
     const headerLogo = document.querySelectorAll(".title-text span");
     const brainLogo = document.querySelector(".brain-logo");
@@ -37,16 +37,30 @@ window.addEventListener("load", () => {
     if (mainButtons != null) {
         mainButtons.forEach(element => {
             element.addEventListener("mouseover", (e) => {
-                // console.log("hover ", e);
-                const mainButtonImg = e.target.childNodes[1].childNodes[0];
-                // console.log("mainButtonImg ", mainButtonImg);
+                if (e.target.tagName == "IMG") {
+                    var mainButtonImg = e.target;
+                    // console.log("e.target ", e.target);
+                }
+                else if (e.target.tagName == "P") {
+                    var mainButtonImg = e.target.childNodes[0];
+                }
+                else {
+                    var mainButtonImg = e.target.childNodes[1].childNodes[0];
+                    // console.log("not e.target ", e.target);
+                }
                 mainButtonImg.classList.add("shake-me");
             });
 
             element.addEventListener("mouseout", (e) => {
-                // console.log("hover ", e);
-                const mainButtonImg = e.target.childNodes[1].childNodes[0];
-                // console.log("mainButtonImg ", mainButtonImg);
+                if (e.target.tagName == "IMG") {
+                    var mainButtonImg = e.target;
+                }
+                else if (e.target.tagName == "P") {
+                    var mainButtonImg = e.target.childNodes[0];
+                }
+                else {
+                    var mainButtonImg = e.target.childNodes[1].childNodes[0];
+                }
                 mainButtonImg.classList.remove("shake-me");
             });
         });
