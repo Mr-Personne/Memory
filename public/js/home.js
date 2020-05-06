@@ -1,10 +1,9 @@
 window.addEventListener("load", () => {
     console.log("home script");
 
-    const mainButtons = document.querySelectorAll(".main-button");
     const headerLogo = document.querySelectorAll(".title-text span");
     const brainLogo = document.querySelector(".brain-logo");
-    
+
     headerLogo.forEach(element => {
         element.addEventListener("mouseover", (e) => {
             // console.log("hover ", e);
@@ -33,19 +32,24 @@ window.addEventListener("load", () => {
         brainImg.classList.remove("wiggle-me");
     });
 
-    mainButtons.forEach(element => {
-        element.addEventListener("mouseover", (e) => {
-            // console.log("hover ", e);
-            const mainButtonImg = e.target.childNodes[1].childNodes[0];
-            // console.log("mainButtonImg ", mainButtonImg);
-            mainButtonImg.classList.add("shake-me");
-        });
+    const mainButtons = document.querySelectorAll(".main-button");
 
-        element.addEventListener("mouseout", (e) => {
-            // console.log("hover ", e);
-            const mainButtonImg = e.target.childNodes[1].childNodes[0];
-            // console.log("mainButtonImg ", mainButtonImg);
-            mainButtonImg.classList.remove("shake-me");
+    if (mainButtons != null) {
+        mainButtons.forEach(element => {
+            element.addEventListener("mouseover", (e) => {
+                // console.log("hover ", e);
+                const mainButtonImg = e.target.childNodes[1].childNodes[0];
+                // console.log("mainButtonImg ", mainButtonImg);
+                mainButtonImg.classList.add("shake-me");
+            });
+
+            element.addEventListener("mouseout", (e) => {
+                // console.log("hover ", e);
+                const mainButtonImg = e.target.childNodes[1].childNodes[0];
+                // console.log("mainButtonImg ", mainButtonImg);
+                mainButtonImg.classList.remove("shake-me");
+            });
         });
-    });
+    }
+
 });
