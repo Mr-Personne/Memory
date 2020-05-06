@@ -71,7 +71,7 @@ button:focus{
     background-color: #5C02AC;
 }
 
-.main-button img:hover {
+.bounce-me {
     animation: bounce 2.5s infinite;
     -webkit-animation: bounce 2.5s infinite;
     -moz-animation: bounce 2.5s infinite;
