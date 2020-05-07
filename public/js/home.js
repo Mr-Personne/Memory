@@ -1,5 +1,13 @@
 window.addEventListener("load", () => {
     // console.log("home script");
+    const containers = document.querySelectorAll(".container");
+    containers[0].classList.add("top-container");
+    containers[1].classList.add("mid-container");
+    containers[2].classList.add("bottom-container");
+    // containers.forEach(element => {
+    //     element.classList.add("wiggle-me");
+    // });
+
 
     const headerLogo = document.querySelectorAll(".title-text span");
     const brainLogo = document.querySelector(".brain-logo");

@@ -1,9 +1,4 @@
-/* body{
-    background-image: url("../images/dude.png");
-    background-repeat: no-repeat;
-    background-position-x: center;
-    background-position-y: bottom;
-} */
+
 
 /* GENERAL */
 .width-25{
@@ -486,17 +481,83 @@ input[type=number]::-webkit-outer-spin-button {
 
 /* // Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) { 
-    
+    body{
+        background: url(/images/bg3.jpg);
+        background-position: top;
+        background-size: cover;
+    }
+    .top-container{
+        background-color: white;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        margin-top: 15px;
+        box-shadow: 0px 20px 20px 3px;
+    }
+    .mid-container{
+        background-color: white;
+        box-shadow: 0px 27px 20px 3px;
+    }
+    .bottom-container{
+        background-color: white;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0px 28px 20px 4px;
+    }
 }
 
 /* // Large devices (desktops, 992px and up) */
 @media (min-width: 992px) and (max-width: 1199.98px) { 
-    
+    body{
+        background: url(/images/bg3.jpg);
+        background-position: top;
+        background-size: cover;
+    }
+    .top-container{
+        background-color: white;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        margin-top: 15px;
+        box-shadow: 0px 20px 20px 3px;
+    }
+    .mid-container{
+        background-color: white;
+        box-shadow: 0px 27px 20px 3px;
+    }
+    .bottom-container{
+        background-color: white;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0px 28px 20px 4px;
+    }
 }
 
 /* // Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 991.98px) { 
-    
+    body{
+        background: url(/images/bg3.jpg);
+        background-position: top;
+        background-size: cover;
+    }
+    .top-container{
+        background-color: white;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        margin-top: 15px;
+        box-shadow: 0px 20px 20px 3px;
+    }
+    .mid-container{
+        background-color: white;
+        box-shadow: 0px 27px 20px 3px;
+    }
+    .bottom-container{
+        background-color: white;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0px 28px 20px 4px;
+    }
 }
 
 /* // Small devices (landscape phones, 576px and up) */
