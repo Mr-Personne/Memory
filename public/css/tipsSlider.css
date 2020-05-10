@@ -4,44 +4,170 @@
     align-items: center;
     height: 100%;
   }
-  
-  .slider-wrapper {
-    position: relative;
-    width: 600px;
-  }
-  
-  .item p{
-    width: 600px;
-    text-align: left;
-}
 
-  button#prev {
-    position: absolute;
-    left: -80px;
-    top: 50%;
-    background: #00000032;
-    padding: 1rem;
-    border: 0;
-    color: #fff;
-    font-size: 20px;
-  }
-  
-  button#next {
-    position: absolute;
-    right: -80px;
-    top: 50%;
-    background: #00000032;
-    padding: 1rem;
-    border: 0;
-    color: #fff;
-    font-size: 20px;
-  }
-  
   .slider {
-    width: 600px;
+    width: 800px;
     display: flex;
     flex-wrap: nowrap;
     justify-content: flex-start;
     overflow-x: hidden;
     scroll-behavior: smooth;
   }
+  
+  .slider-wrapper {
+    position: relative;
+    width: 800px;
+  }
+  
+  .item p{
+    width: 800px;
+    text-align: left;
+  }
+
+.item img{
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+  button#prev {
+    cursor: pointer;
+    position: absolute;
+    left: -80px;
+    top: 50%;
+    background: #00000000;
+    padding: 1rem;
+    border: 0;
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+  }
+  button#prev img{
+    width: 30px;
+  }
+  
+  button#next {
+    cursor: pointer;
+    position: absolute;
+    right: -80px;
+    top: 50%;
+    background: #00000000;
+    padding: 1rem;
+    border: 0;
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+  }
+  button#next img{
+    width: 30px;
+  }
+  
+  
+
+  /* // Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+  .slider {
+    width: 800px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+  
+  .slider-wrapper {
+    position: relative;
+    width: 800px;
+  }
+  
+  .item p{
+    width: 800px;
+    text-align: left;
+  }
+}
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+  .slider {
+    width: 800px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+  
+  .slider-wrapper {
+    position: relative;
+    width: 800px;
+  }
+  
+  .item p{
+    width: 800px;
+    text-align: left;
+  }
+}
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) { 
+  .slider {
+    width: 500px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+  
+  .slider-wrapper {
+    position: relative;
+    width: 500px;
+  }
+  
+  .item p{
+    width: 500px;
+    text-align: left;
+  }
+}
+
+/* // Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) { 
+  .slider {
+    width: 300px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+  
+  .slider-wrapper {
+    position: relative;
+    width: 300px;
+  }
+  
+  .item p{
+    width: 300px;
+    text-align: left;
+  }
+}
+
+/* // Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) { 
+  .slider {
+    width: 300px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+  
+  .slider-wrapper {
+    position: relative;
+    width: 300px;
+  }
+  
+  .item p{
+    width: 300px;
+    text-align: left;
+  }
+  
+}
