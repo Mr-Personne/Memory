@@ -22,37 +22,13 @@ window.addEventListener("load", () => {
     var width = 300;
   }
 
-  
-
-  // function slideToPage(num, currWidth){
-  //   console.log("dots");
-  //   var width = currWidth * num;
-
-  //   next.addEventListener("click", function () {
-  //     slider.scrollLeft += width;
-  //     setTimeout(() => {
-  //       this.setAttribute("disabled", "true");
-  //     }, 0);
-  //     setTimeout(() => {
-  //       this.removeAttribute("disabled", "true");
-  //     }, 1000);
-  //   });
-  //   prev.addEventListener("click", function () {
-  //     slider.scrollLeft -= width;
-  //     setTimeout(() => {
-  //       this.setAttribute("disabled", "true");
-  //     }, 0);
-  //     setTimeout(() => {
-  //       this.removeAttribute("disabled", "true");
-  //     }, 1000);
-  //   });
-  // }
 
   //generate dots
-  const dotsAmount = 4;
+  //set dotsAmount and DotActiveList based on tips html page items...
+  const dotsAmount = 6;
+  var dotActiveList = ["active", "dot", "dot", "dot", "dot", "dot"]
   const dotSection = document.querySelector(".dot-section");
   var dotSpans = '<span id="dot" class="dot active"></span>';
-  var dotActiveList = ["active", "dot", "dot", "dot"]
 
   for (let i = 2; i <= dotsAmount; i++) {
     dotSpans += '<span id="dot" class="dot"></span>';
@@ -113,7 +89,7 @@ window.addEventListener("load", () => {
         dotActiveList[num-1] = "active";
         dots[aIndx].classList.remove("active");
         dots[num-1].classList.add("active");
-        
+
         slider.scrollLeft -= currwidth;
 
 
