@@ -21,9 +21,22 @@
 }
 
 .title-text{
-    font-family: Impact, Charcoal, sans-serif;
+    /* font-family: Impact, Charcoal, sans-serif; */
+    font-family: Harlow Solid, sans-serif;
     font-size: 10rem;
 }
+
+.title-text span {
+    text-shadow: -6px -3px 0px #ffca4f;
+    font-family: Harlow Solid, sans-serif;
+}
+.title-text span:first-child {
+    margin-right: -10px;
+}
+.title-text span:last-child {
+    margin-left: -15px;
+}
+
 .title-text a{
     color: #4203d7;
     text-decoration: none;
@@ -566,10 +579,17 @@ input[type=number]::-webkit-outer-spin-button {
         font-family: Impact, Charcoal, sans-serif;
         font-size: 8rem;
     }
+    .title-text span:first-child {
+        margin-right: -5px;
+    }
+    .title-text span:last-child {
+        margin-left: -5px;
+    }
     .brain-logo {
-        width: 120px;
+        width: 100px;
         margin-left: -20px;
         margin-right: -20px;
+        margin-top: 20px;
     }
 }
 
@@ -582,6 +602,12 @@ input[type=number]::-webkit-outer-spin-button {
     .title-text {
         font-size: 4rem;
         margin-bottom: 35px;
+    }
+    .title-text span:first-child {
+        margin-right: -5px;
+    }
+    .title-text span:last-child {
+        margin-left: -5px;
     }
     .brain-logo {
         width: 55px;
