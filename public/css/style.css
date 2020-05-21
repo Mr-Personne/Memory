@@ -495,7 +495,7 @@ input[type=number]::-webkit-outer-spin-button {
 /* // Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) { 
     body{
-        background: url(/images/bg3.jpg);
+        background: url(/images/bg3-2.png);
         background-position: top;
         background-size: cover;
     }
