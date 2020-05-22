@@ -111,6 +111,10 @@ button:focus{
     background-color: #5C02AC;
 }
 
+img.bottom-dude {
+    padding-top: 10px;
+}
+
 /* bounce animation */
 .bounce-me {
     animation: bounce 2.5s infinite;
@@ -707,5 +711,13 @@ input[type=number]::-webkit-outer-spin-button {
     .ready-memorise-button, #ready-btn{
         width: 100%;
     }
+
+    .dot{
+        height: 40px !important;
+        width: 40px !important;
+    }
     
+    button#prev, button#next{
+        display: none;
+    }
 }
