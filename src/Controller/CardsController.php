@@ -63,6 +63,11 @@ class CardsController extends AbstractController
 
         // print_r($session->get('attribute-name'));
         $randCardsLen = $session->get('cardQuantity');
+        if ($randCardsLen == "") {
+            // echo 'no GENERATED';
+            return $this->redirectToRoute('cards_setup');
+        }
+
         $cardSuits = ["S", "D", "C", "H"];
         $numberOfCards = 0;
         $currentPack = [];
@@ -146,6 +151,11 @@ class CardsController extends AbstractController
      */
     public function recall(Request $request, SessionInterface $session)
     {
+        $answer = $session->get('generatedCards');
+        if ($answer == "") {
+            // echo 'no GENERATED';
+            return $this->redirectToRoute('cards_setup');
+        }
 
         $form = $this->createForm(RecallCardType::class);
         $form->handleRequest($request);
@@ -170,6 +180,11 @@ class CardsController extends AbstractController
         $userAnswerSession = $session->get('userAnswer');
         $userAnswer = strtoupper($userAnswerSession['userAnswer']);
         $answer = $session->get('generatedCards');
+
+        if ($answer == "") {
+            // echo 'no GENERATED';
+            return $this->redirectToRoute('cards_setup');
+        }
         
         $userAnswArr = explode(" ", $userAnswer);
         $answArr = $answer;
