@@ -64,7 +64,12 @@ class PeopleController extends AbstractController
      */
     public function memorise(SessionInterface $session, PersonRepository $PersonRepository)
     {
-        
+        $peopleQuantity = $session->get('peopleQuantity');
+        if ($peopleQuantity == "") {
+            // echo 'no GENERATED';
+            return $this->redirectToRoute('people_setup');
+        }
+
         //reset user answer index
         $session->set('userPersonIndex', 1);
 
@@ -108,6 +113,12 @@ class PeopleController extends AbstractController
      */
     public function recall(Request $request, SessionInterface $session)
     {
+        $answer = $session->get('generatedPeople');
+        if ($answer == "") {
+            // echo 'no GENERATED';
+            return $this->redirectToRoute('people_setup');
+        }
+
         if ($session->has('userPersonIndex') == false) {
             $session->set('userPersonIndex', 1);
         }
@@ -171,6 +182,11 @@ class PeopleController extends AbstractController
         $jsonAnswer = $session->get('generatedPeople');
         $answer = json_decode($jsonAnswer, true);
         $currNum = $session->get('userPersonIndex');
+        
+        if ($answer == "") {
+            // echo 'no GENERATED';
+            return $this->redirectToRoute('people_setup');
+        }
 
         if (!$jsonAnswer) {
             return $this->redirectToRoute('default');
