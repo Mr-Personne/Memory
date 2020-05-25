@@ -61,6 +61,12 @@ class WordsController extends AbstractController
      */
     public function memorise(SessionInterface $session, WordRepository $wordRepository)
     {
+        $wordQuantity = $session->get('wordQuantity');
+        if ($wordQuantity == "") {
+            // echo 'no GENERATED';
+            return $this->redirectToRoute('words_setup');
+        }
+
         $wordsList = $wordRepository->findAll();
         shuffle($wordsList);
         // print_r($wordsList);
