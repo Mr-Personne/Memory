@@ -129,10 +129,17 @@ class NumbersController extends AbstractController
      */
     public function score(SessionInterface $session)
     {
+        $answer = $session->get('generatedNums');
+
+        if ($answer == "") {
+            echo 'no GENERATED';
+            return $this->redirectToRoute('numbers_setup');
+        }
+
         $userAnswerSession = $session->get('userAnswer');
         $userAnswer = $userAnswerSession['userAnswer'];
 
-        $answer = $session->get('generatedNums');
+        $session->clear();
         // print_r($userAnswer);
         // echo ' vs ';
         // print_r($answer);
