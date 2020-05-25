@@ -149,7 +149,7 @@ class NumbersController extends AbstractController
         $userAnswerSession = $session->get('userAnswer');
         $userAnswer = $userAnswerSession['userAnswer'];
 
-        $session->clear();
+        // $session->clear();
         // print_r($userAnswer);
         // echo ' vs ';
         // print_r($answer);
