@@ -38,21 +38,23 @@ window.addEventListener("load", () => {
   //set on click dots
   const dots = document.querySelectorAll(".dot");
   var currPageNum = 1;
-  console.log(dots);
+  // console.log(dots);
   for (let j = 0; j < dot.length; j++) {
-    console.log(dots[j]);
+    // console.log(dots[j]);
     // dots[j].addEventListener('click', slideToPage(j+1, width));
     
     //ADD EVENT DOTS
     dots[j].addEventListener('click', () => {
       
       var num = j+1;
-      console.log("dots inner " , num);
+      // console.log("dots inner " , num);
       
       //LEFT to right
       if (currPageNum < num) {
+        // console.log("currPageNum ", currPageNum, "");
+        // console.log(width+ " * " + " ( "+num+ " - "+ currPageNum+" )");
         var currwidth = width * (num - currPageNum);
-        console.log("currwidth " , currwidth,"width " , width);
+        // console.log("currwidth " , currwidth,"width " , width);
         // dots[currPageNum-1].classList.remove("active");
         // dotActiveList[currPageNum-1] = "dot";
         // dots[num-1].classList.add("active");
@@ -76,8 +78,10 @@ window.addEventListener("load", () => {
       }
       else if(currPageNum > num){
         //RIGHT TO LEFT
+        // console.log("currPageNum ", currPageNum, "");
+        // console.log(width+ " * " + " ( "+currPageNum+ " - "+ num+" )");
         var currwidth = width * (currPageNum - num);
-        console.log("currwidth " , currwidth,"width " , width);
+        // console.log("currwidth " , currwidth,"width " , width);
         // dots[currPageNum-1].classList.remove("active");
         // dotActiveList[currPageNum-1] = "dot";
         // dots[num-1].classList.add("active");
@@ -110,11 +114,14 @@ window.addEventListener("load", () => {
     slider.scrollLeft += width;
     if (dotActiveList.indexOf("active") != -1 && dotActiveList.indexOf("active") != dotActiveList.length-1) {
       var aIndx = dotActiveList.indexOf("active");
+      // console.log("aIndx ", aIndx, "");
       dotActiveList[aIndx] = "dot";
       dotActiveList[aIndx+1] = "active";
       dots[aIndx].classList.remove("active");
       dots[aIndx+1].classList.add("active");
-      currPageNum = aIndx+1;
+      var curraIndx = dotActiveList.indexOf("active");
+      currPageNum = curraIndx+1;
+      // console.log("currPageNum ", currPageNum, "");
     }
     setTimeout(() => {
       this.setAttribute("disabled", "true");
@@ -131,7 +138,10 @@ window.addEventListener("load", () => {
       dotActiveList[aIndx-1] = "active";
       dots[aIndx].classList.remove("active");
       dots[aIndx-1].classList.add("active");
-      currPageNum = aIndx-1;
+      var curraIndx = dotActiveList.indexOf("active");
+      currPageNum = curraIndx+1;
+      // console.log("curraIndx ", curraIndx, "");
+      // console.log("currPageNum ", currPageNum, "");
     }
     setTimeout(() => {
       this.setAttribute("disabled", "true");
