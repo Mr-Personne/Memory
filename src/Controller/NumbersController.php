@@ -108,6 +108,11 @@ class NumbersController extends AbstractController
      */
     public function recall(Request $request, SessionInterface $session)
     {
+        $answer = $session->get('generatedNums');
+        if ($answer == "") {
+            // echo 'no GENERATED';
+            return $this->redirectToRoute('numbers_setup');
+        }
 
         $form = $this->createForm(RecallNumberType::class);
         $form->handleRequest($request);
@@ -132,7 +137,7 @@ class NumbersController extends AbstractController
         $answer = $session->get('generatedNums');
 
         if ($answer == "") {
-            echo 'no GENERATED';
+            // echo 'no GENERATED';
             return $this->redirectToRoute('numbers_setup');
         }
 
