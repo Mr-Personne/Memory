@@ -103,6 +103,11 @@ class WordsController extends AbstractController
      */
     public function recall(Request $request, SessionInterface $session)
     {
+        $answer = $session->get('generatedWords');
+        if ($answer == "") {
+            // echo 'no GENERATED';
+            return $this->redirectToRoute('words_setup');
+        }
 
         $form = $this->createForm(RecallWordType::class);
         $form->handleRequest($request);
