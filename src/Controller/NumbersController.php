@@ -68,6 +68,11 @@ class NumbersController extends AbstractController
 
         // print_r($session->get('attribute-name'));
         $randNumLen = $session->get('numQuantity');
+        if ($randNumLen == "") {
+            // echo 'no GENERATED';
+            return $this->redirectToRoute('numbers_setup');
+        }
+
         $setNumbers = 1;
         $generatedNums = "";
         for ($i = 0; $i < $randNumLen; $i++) {
