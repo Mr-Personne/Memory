@@ -127,6 +127,12 @@ class WordsController extends AbstractController
         $userAnswerSession = $session->get('userAnswer');
         $userAnswer = strtolower($userAnswerSession['userAnswer']);
         $answer = $session->get('generatedWords');
+
+        if ($answer == "") {
+            // echo 'no GENERATED';
+            return $this->redirectToRoute('words_setup');
+        }
+
         $answer = str_replace(",", " ", $answer);
         // $userAnswer = str_replace(" ", "", $userAnswer);
         $userAnswArr = explode(" ", $userAnswer);
