@@ -584,6 +584,19 @@ input[type=number]::-webkit-outer-spin-button {
         margin-bottom: 20px;
         box-shadow: 0px 28px 20px 4px;
     }
+
+    #recall_number_userAnswer, #recall_word_userAnswer,
+    #recall_card_userAnswer, #recall_people_address, #recall_people_town,
+    #recall_people_postalCode, #recall_people_age, #recall_people_job {
+        width: 90%;
+    }
+    #recall_number_answer, #recall_word_answer,
+    #recall_card_answer, #recall_people_answer, #recall_people_recallMore {
+        width: 90%;
+    }
+    .button-redo, .button-resetup, .button-astuces, .button-home {
+        width: 90%;
+    }
 }
 
 /* // Small devices (landscape phones, 576px and up) */
