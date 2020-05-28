@@ -254,7 +254,7 @@ input[type=number]::-webkit-outer-spin-button {
 #setup_number_minutes, #setup_word_minutes, #setup_people_minutes, #setup_card_minutes{
     border-radius: 10px;
     height: 60px;
-    width: 120px;
+    width: 110px;
     text-align: center;
     font-size: 30px;
 }
@@ -262,9 +262,10 @@ input[type=number]::-webkit-outer-spin-button {
 #setup_number_secondes, #setup_word_secondes, #setup_people_secondes, #setup_card_secondes{
     border-radius: 10px;
     height: 60px;
-    width: 120px;
+    width: 110px;
     text-align: center;
     font-size: 30px;
+    margin-left: 2px
 }
 
 #setup_number_go, #setup_word_go, #setup_people_go, #setup_card_go{
