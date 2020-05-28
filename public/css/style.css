@@ -503,9 +503,10 @@ input[type=number]::-webkit-outer-spin-button {
 /* // Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) { 
     body{
-        background: url(/images/bg3-2.png);
+        background: url(/images/custom-bg1.svg);
         background-position: top;
         background-size: cover;
+        /* background-repeat: repeat-y; */
     }
     .top-container{
         background-color: white;
