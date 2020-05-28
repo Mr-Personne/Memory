@@ -535,7 +535,7 @@ input[type=number]::-webkit-outer-spin-button {
 /* // Large devices (desktops, 992px and up) */
 @media (min-width: 992px) and (max-width: 1199.98px) { 
     body{
-        background: url(/images/bg3.jpg);
+        background: url(/images/custom-bg1.svg);
         background-position: top;
         background-size: cover;
     }
@@ -562,7 +562,7 @@ input[type=number]::-webkit-outer-spin-button {
 /* // Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 991.98px) { 
     body{
-        background: url(/images/bg3.jpg);
+        background: url(/images/custom-bg1.svg);
         background-position: top;
         background-size: cover;
     }
