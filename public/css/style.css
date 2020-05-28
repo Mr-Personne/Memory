@@ -239,7 +239,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 #setup_number_quantity, #setup_word_quantity, #setup_people_quantity, #setup_card_quantity{
     border-radius: 10px;
-    /* border: 1px solid #d4d4d4; */
+    border: 1px solid #d4d4d4;
     height: 60px;
     width: 300px;
     text-align: center;
@@ -254,7 +254,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 #setup_number_minutes, #setup_word_minutes, #setup_people_minutes, #setup_card_minutes{
     border-radius: 10px;
-    /* border: 1px solid #d4d4d4; */
+    border: 1px solid #d4d4d4;
     height: 60px;
     width: 110px;
     text-align: center;
@@ -263,7 +263,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 #setup_number_secondes, #setup_word_secondes, #setup_people_secondes, #setup_card_secondes{
     border-radius: 10px;
-    /* border: 1px solid #d4d4d4; */
+    border: 1px solid #d4d4d4;
     height: 60px;
     width: 110px;
     text-align: center;
@@ -404,6 +404,7 @@ input[type=number]::-webkit-outer-spin-button {
 #recall_people_age,
 #recall_people_job{
     border-radius: 10px;
+    border: 1px solid #d4d4d4;
     height: 60px;
     width: 100%;
     text-align: center;
@@ -411,6 +412,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 #recall_people_firstName, #recall_people_lastName{
     border-radius: 10px;
+    border: 1px solid #d4d4d4;
     height: 60px;
     width: 100%;
     text-align: center;
