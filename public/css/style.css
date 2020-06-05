@@ -649,13 +649,20 @@ input[type=number]::-webkit-outer-spin-button {
 
 /* // Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) { 
-    body{
+    /* body{
         height: 100vh;
         background: url(/images/balding-dude-orange.png);
         background-position: bottom;
         background-size: contain;
         background-repeat: no-repeat;
         background-attachment: fixed;
+    } */
+
+    .dude-container{
+        /* position: absolute;
+        bottom: 0; */
+        /* background-color: white; */
+        z-index: -1000;
     }
 
     .title-size{
@@ -701,9 +708,9 @@ input[type=number]::-webkit-outer-spin-button {
     }
 
     .bottom-dude{
-        /* width: 70%; */
-        width: 100%;
-        visibility: hidden;
+        width: 70%;
+        /* width: 100%;
+        visibility: hidden; */
     }
 
     /* SECTION SETUP */
@@ -777,6 +784,13 @@ input[type=number]::-webkit-outer-spin-button {
     button#prev, button#next{
         display: none;
     }
+
+    /* SECTION TIPS&TRICKS */
+    /* .item img {
+        margin-top: 0px !important;
+        margin-bottom: 40px;
+        width: 100px;
+    } */
 
     /* ERROR PAGES SECTION */
     .error-text{
