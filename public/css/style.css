@@ -506,6 +506,32 @@ input[type=number]::-webkit-outer-spin-button {
     text-decoration: underline;
 }
 
+
+/* ERROR PAGES SECTION */
+.error-text{
+    font-family: 'Harlow Solid', sans-serif;
+    color: #FFCA4F;
+    text-shadow: 9px 10px #4203D7;
+    font-size: 200px;
+    animation: myanim 3s infinite;
+    transition: all 2s;
+    position: relative;
+    top: 0px;
+}
+
+.error-subtext{
+    font-family: 'Harlow Solid', sans-serif;
+    font-size: 80px;
+    line-height: 60px;
+}
+
+
+@keyframes myanim{
+    0%{ text-shadow: 9px 10px #4203D7; color: #FFCA4F; top: 0px;}
+    50%{ text-shadow: 9px 10px #FFCA4F; color: #4203D7; top: -20px;}
+    100%{ text-shadow: 9px 10px #4203D7; color: #FFCA4F; top: 0px;}
+}
+
 /* // Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) { 
     body{
@@ -739,5 +765,23 @@ input[type=number]::-webkit-outer-spin-button {
     
     button#prev, button#next{
         display: none;
+    }
+
+    /* ERROR PAGES SECTION */
+    .error-text{
+        font-family: 'Harlow Solid', sans-serif;
+        color: #FFCA4F;
+        text-shadow: 9px 10px #4203D7;
+        font-size: 100px;
+        animation: myanim 3s infinite;
+        transition: all 2s;
+        position: relative;
+        top: 0px;
+    }
+
+    .error-subtext{
+        font-family: 'Harlow Solid', sans-serif;
+        font-size: 40px;
+        line-height: 30px;
     }
 }
