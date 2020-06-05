@@ -649,6 +649,15 @@ input[type=number]::-webkit-outer-spin-button {
 
 /* // Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) { 
+    body{
+        height: 100vh;
+        background: url(/images/balding-dude-orange.png);
+        background-position: bottom;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+
     .title-size{
         width: 100%;
     }
@@ -692,7 +701,9 @@ input[type=number]::-webkit-outer-spin-button {
     }
 
     .bottom-dude{
-        width: 70%;
+        /* width: 70%; */
+        width: 100%;
+        visibility: hidden;
     }
 
     /* SECTION SETUP */
