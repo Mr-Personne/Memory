@@ -30,7 +30,7 @@ class SetupPeopleType extends AbstractType
                      'class' => 'quantity',
                      'min' => 1,
                      'max' => 199,
-                     'value' => 4,
+                     'value' => 4
                     ], 
             ])
             ->add('minutes', IntegerType::class, [
@@ -38,7 +38,8 @@ class SetupPeopleType extends AbstractType
                 'attr' => [
                     'class' => 'minutes',
                     'min' => 0,
-                    'value' => 5
+                    'value' => 5,
+                     'placeholder' => 'mins...'
                    ], 
             ])
             ->add('secondes', IntegerType::class, [
@@ -47,7 +48,8 @@ class SetupPeopleType extends AbstractType
                     'class' => 'secondes',
                     'min' => 0,
                     'max' => 59,
-                    'value' => 0
+                    'value' => 0,
+                    'placeholder' => 'secs...'
                    ], 
             ])
             ->add('go', SubmitType::class);

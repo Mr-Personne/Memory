@@ -19,7 +19,7 @@ class SetupWordType extends AbstractType
                      'class' => 'quantity',
                      'min' => 1,
                      'max' => 2000,
-                     'value' => 10,
+                     'value' => 10
                     ], 
             ])
             ->add('minutes', IntegerType::class, [
@@ -27,7 +27,8 @@ class SetupWordType extends AbstractType
                 'attr' => [
                     'class' => 'minutes',
                     'min' => 0,
-                    'value' => 5
+                    'value' => 5,
+                     'placeholder' => 'mins...'
                    ], 
             ])
             ->add('secondes', IntegerType::class, [
@@ -36,7 +37,8 @@ class SetupWordType extends AbstractType
                     'class' => 'secondes',
                     'min' => 0,
                     'max' => 59,
-                    'value' => 0
+                    'value' => 0,
+                    'placeholder' => 'secs...'
                    ], 
             ])
             ->add('go', SubmitType::class);

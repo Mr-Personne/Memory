@@ -18,7 +18,7 @@ class SetupCardType extends AbstractType
                  'attr' => [
                      'class' => 'quantity',
                      'min' => 1,
-                     'value' => 52,
+                     'value' => 52
                     ], 
             ])
             ->add('minutes', IntegerType::class, [
@@ -26,7 +26,8 @@ class SetupCardType extends AbstractType
                 'attr' => [
                     'class' => 'minutes',
                     'min' => 0,
-                    'value' => 5
+                    'value' => 5,
+                     'placeholder' => 'mins...'
                    ], 
             ])
             ->add('secondes', IntegerType::class, [
@@ -35,7 +36,8 @@ class SetupCardType extends AbstractType
                     'class' => 'secondes',
                     'min' => 0,
                     'max' => 59,
-                    'value' => 0
+                    'value' => 0,
+                    'placeholder' => 'secs...'
                    ], 
             ])
             ->add('go', SubmitType::class);
